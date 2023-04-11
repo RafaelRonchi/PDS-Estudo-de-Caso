@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SelecionarSala2 extends JFrame {
 
@@ -66,11 +68,19 @@ public class SelecionarSala2 extends JFrame {
 		contentPane.add(lblSalaB_2);
 		
 		JButton BtnSalaB1 = new JButton("");
+		BtnSalaB1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		BtnSalaB1.setIcon(new ImageIcon(SelecionarSala2.class.getResource("/Images/Sala_resized.jpeg")));
 		BtnSalaB1.setBounds(66, 145, 307, 280);
 		contentPane.add(BtnSalaB1);
 		
 		JButton BtnSalaB2 = new JButton("");
+		BtnSalaB2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		BtnSalaB2.setIcon(new ImageIcon(SelecionarSala2.class.getResource("/Images/Sala_resized.jpeg")));
 		BtnSalaB2.setBounds(445, 145, 307, 280);
 		contentPane.add(BtnSalaB2);

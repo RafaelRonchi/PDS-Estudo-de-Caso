@@ -11,6 +11,9 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.security.interfaces.DSAKey;
+import java.awt.event.ActionEvent;
 
 public class SelecionarSala1 extends JFrame {
 
@@ -54,6 +57,11 @@ public class SelecionarSala1 extends JFrame {
 		contentPane.add(lblSelecioneUmaSala);
 		
 		JButton BtnSalaA1 = new JButton("");
+		BtnSalaA1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		BtnSalaA1.setIcon(new ImageIcon(SelecionarSala1.class.getResource("/Images/Sala_resized.jpeg")));
 		BtnSalaA1.setBounds(52, 120, 307, 280);
 		contentPane.add(BtnSalaA1);
@@ -65,6 +73,10 @@ public class SelecionarSala1 extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton BtnSalaA2 = new JButton("");
+		BtnSalaA2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		BtnSalaA2.setIcon(new ImageIcon(SelecionarSala1.class.getResource("/Images/Sala_resized.jpeg")));
 		BtnSalaA2.setBounds(466, 120, 307, 280);
 		contentPane.add(BtnSalaA2);
