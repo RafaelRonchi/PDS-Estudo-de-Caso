@@ -42,6 +42,7 @@ public class JFrameMain extends JFrame {
 	 * Create the frame.
 	 */
 	public JFrameMain() {
+		setBackground(Color.WHITE);
 		setTitle("Sistema de Cinema");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,7 +56,7 @@ public class JFrameMain extends JFrame {
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setBackground(Color.WHITE);
 		btnLogin.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 11));
-		btnLogin.setBounds(305, 263, 89, 23);
+		btnLogin.setBounds(232, 274, 113, 33);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String user = txtUsuario.getText();
@@ -82,36 +83,36 @@ public class JFrameMain extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Abrir sistema");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 29));
-		lblNewLabel.setBounds(340, 76, 182, 66);
+		lblNewLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 46));
+		lblNewLabel.setBounds(278, 43, 287, 66);
 		contentPane.add(lblNewLabel);
 		
 		txtUsuario = new JTextField();
-		txtUsuario.setBounds(305, 171, 260, 20);
+		txtUsuario.setBounds(320, 154, 260, 25);
 		contentPane.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Usuário:");
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1.setFont(new Font("Yu Gothic Light", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(224, 172, 71, 25);
+		lblNewLabel_1.setFont(new Font("Yu Gothic Light", Font.BOLD, 23));
+		lblNewLabel_1.setBounds(190, 149, 113, 38);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Senha:");
 		lblNewLabel_1_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1_1.setFont(new Font("Yu Gothic Light", Font.BOLD, 14));
-		lblNewLabel_1_1.setBounds(224, 215, 71, 25);
+		lblNewLabel_1_1.setFont(new Font("Yu Gothic Light", Font.BOLD, 23));
+		lblNewLabel_1_1.setBounds(200, 198, 105, 55);
 		contentPane.add(lblNewLabel_1_1);
 		
 		txtSenha = new JTextField();
 		txtSenha.setColumns(10);
-		txtSenha.setBounds(305, 214, 260, 20);
+		txtSenha.setBounds(320, 211, 260, 25);
 		contentPane.add(txtSenha);
 		
 		JButton btnLimpar = new JButton("Limpar");
 		btnLimpar.setBackground(Color.WHITE);
 		btnLimpar.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 11));
-		btnLimpar.setBounds(450, 263, 89, 23);
+		btnLimpar.setBounds(479, 274, 105, 33);
 		contentPane.add(btnLimpar);
 	}
 }
