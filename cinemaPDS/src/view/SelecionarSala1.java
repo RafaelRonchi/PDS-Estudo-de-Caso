@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class SelecionarSala1 extends JFrame {
 
@@ -35,6 +36,7 @@ public class SelecionarSala1 extends JFrame {
 	 * Create the frame.
 	 */
 	public SelecionarSala1() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(SelecionarSala1.class.getResource("/Images/filme1_resized.jpeg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		setBounds(100, 100, 860, 500);
@@ -52,7 +54,7 @@ public class SelecionarSala1 extends JFrame {
 		contentPane.add(lblSelecioneUmaSala);
 		
 		JButton BtnSalaA1 = new JButton("");
-		BtnSalaA1.setIcon(new ImageIcon(SelecionarSala1.class.getResource("/Images/Sala_resized")));
+		BtnSalaA1.setIcon(new ImageIcon(SelecionarSala1.class.getResource("/Images/Sala_resized.jpeg")));
 		BtnSalaA1.setBounds(52, 120, 307, 280);
 		contentPane.add(BtnSalaA1);
 		
@@ -63,7 +65,7 @@ public class SelecionarSala1 extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton BtnSalaA2 = new JButton("");
-		BtnSalaA2.setIcon(new ImageIcon("C:\\Users\\Rafael\\Desktop\\GitClone\\PDS-Estudo-de-Caso\\cinemaPDS\\src\\Images\\Sala_resized.jpg"));
+		BtnSalaA2.setIcon(new ImageIcon(SelecionarSala1.class.getResource("/Images/Sala_resized.jpeg")));
 		BtnSalaA2.setBounds(466, 120, 307, 280);
 		contentPane.add(BtnSalaA2);
 		
