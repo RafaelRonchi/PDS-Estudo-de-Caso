@@ -52,7 +52,10 @@ public class SelecionarFilme extends JFrame {
 		JButton btnFilme1 = new JButton("");
 		btnFilme1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				dispose(); // fecha tela atual
+				SelecionarSala1 sl1 = new SelecionarSala1();
+				sl1.setLocationRelativeTo(null);
+				sl1.setVisible(true);
 			}
 		});
 		btnFilme1.setBackground(Color.WHITE);
@@ -63,7 +66,10 @@ public class SelecionarFilme extends JFrame {
 		JButton btnFilme1_1 = new JButton("");
 		btnFilme1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				dispose(); // fecha tela atual
+				SelecionarSala2 sl2 = new SelecionarSala2();
+				sl2.setLocationRelativeTo(null);
+				sl2.setVisible(true);
 			}
 		});
 		btnFilme1_1.setBackground(Color.WHITE);
@@ -74,11 +80,14 @@ public class SelecionarFilme extends JFrame {
 		JButton btnFilme1_1_1 = new JButton("");
 		btnFilme1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				dispose(); // fecha tela atual
+				SelecionarSala3 sl3 = new SelecionarSala3();
+				sl3.setLocationRelativeTo(null);
+				sl3.setVisible(true);
 			}
 		});
 		btnFilme1_1_1.setBackground(Color.WHITE);
-		btnFilme1_1_1.setIcon(new ImageIcon("C:\\Users\\Rafael\\Desktop\\GitClone\\PDS-Estudo-de-Caso\\cinemaPDS\\src\\Images\\filmes_16093_01_resized.png"));
+		btnFilme1_1_1.setIcon(new ImageIcon(SelecionarFilme.class.getResource("/Images/filmes_16093_01_resized.png")));
 		btnFilme1_1_1.setBounds(571, 68, 252, 359);
 		contentPane.add(btnFilme1_1_1);
 		
