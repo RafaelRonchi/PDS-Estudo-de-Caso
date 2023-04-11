@@ -63,7 +63,6 @@ public class JFrameMain extends JFrame {
 				
 				var login = "admin";
 				
-				System.out.println(user +""+ senha);
 				
 				if((user.equals(login)) && (senha.equals(login))) {
 					dispose(); // fecha tela atual
@@ -110,6 +109,7 @@ public class JFrameMain extends JFrame {
 		contentPane.add(txtSenha);
 		
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.setBackground(Color.WHITE);
 		btnLimpar.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 11));
 		btnLimpar.setBounds(450, 263, 89, 23);
 		contentPane.add(btnLimpar);
