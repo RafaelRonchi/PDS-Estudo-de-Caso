@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class JFrameMain extends JFrame {
 
@@ -42,6 +43,7 @@ public class JFrameMain extends JFrame {
 	 * Create the frame.
 	 */
 	public JFrameMain() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(JFrameMain.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
 		setBackground(Color.WHITE);
 		setTitle("Sistema de Cinema");
 		setResizable(false);

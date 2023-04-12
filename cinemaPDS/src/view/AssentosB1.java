@@ -11,6 +11,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class AssentosB1 extends JFrame {
 
@@ -36,6 +37,7 @@ public class AssentosB1 extends JFrame {
 	 * Create the frame.
 	 */
 	public AssentosB1() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(AssentosB1.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
 		setBackground(Color.WHITE);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

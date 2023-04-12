@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class SelecionarSala2 extends JFrame {
 
@@ -37,6 +38,7 @@ public class SelecionarSala2 extends JFrame {
 	 * Create the frame.
 	 */
 	public SelecionarSala2() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(SelecionarSala2.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
 		setBackground(Color.WHITE);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
