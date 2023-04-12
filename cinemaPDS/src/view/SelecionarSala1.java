@@ -14,6 +14,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.security.interfaces.DSAKey;
 import java.awt.event.ActionEvent;
+import javax.swing.UIManager;
 
 public class SelecionarSala1 extends JFrame {
 
@@ -51,41 +52,57 @@ public class SelecionarSala1 extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblSelecioneUmaSala = new JLabel("Selecione uma Sala");
-		lblSelecioneUmaSala.setBounds(211, 0, 411, 62);
+		lblSelecioneUmaSala.setBounds(216, 33, 411, 51);
 		lblSelecioneUmaSala.setForeground(Color.WHITE);
 		lblSelecioneUmaSala.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 46));
 		contentPane.add(lblSelecioneUmaSala);
 		
 		JButton BtnSalaA1 = new JButton("");
+		BtnSalaA1.setBackground(Color.BLACK);
 		BtnSalaA1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 			}
 		});
 		BtnSalaA1.setIcon(new ImageIcon(SelecionarSala1.class.getResource("/Images/Sala_resized.jpeg")));
-		BtnSalaA1.setBounds(52, 120, 307, 280);
+		BtnSalaA1.setBounds(67, 144, 307, 280);
 		contentPane.add(BtnSalaA1);
 		
-		JLabel lblNewLabel = new JLabel("Sala A1");
-		lblNewLabel.setForeground(Color.WHITE);
+		JLabel lblNewLabel = new JLabel("13:35 - Sala A1");
+		lblNewLabel.setForeground(Color.LIGHT_GRAY);
 		lblNewLabel.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 21));
-		lblNewLabel.setBounds(165, 84, 79, 29);
+		lblNewLabel.setBounds(153, 104, 148, 29);
 		contentPane.add(lblNewLabel);
 		
 		JButton BtnSalaA2 = new JButton("");
+		BtnSalaA2.setBackground(Color.BLACK);
 		BtnSalaA2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		BtnSalaA2.setIcon(new ImageIcon(SelecionarSala1.class.getResource("/Images/Sala_resized.jpeg")));
-		BtnSalaA2.setBounds(466, 120, 307, 280);
+		BtnSalaA2.setBounds(454, 144, 307, 280);
 		contentPane.add(BtnSalaA2);
 		
-		JLabel lblSalaA = new JLabel("Sala A2");
-		lblSalaA.setForeground(Color.WHITE);
+		JLabel lblSalaA = new JLabel("19:00 - Sala A2");
+		lblSalaA.setForeground(Color.LIGHT_GRAY);
 		lblSalaA.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 21));
-		lblSalaA.setBounds(581, 84, 79, 29);
+		lblSalaA.setBounds(538, 104, 148, 29);
 		contentPane.add(lblSalaA);
+		
+		JButton btnNewButton = new JButton("Voltar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose(); // fecha tela atual
+				SelecionarFilme selctFilm = new SelecionarFilme();
+				selctFilm.setLocationRelativeTo(null);
+				selctFilm.setVisible(true);
+			}
+		});
+		btnNewButton.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 12));
+		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setBounds(10, 11, 98, 23);
+		contentPane.add(btnNewButton);
 	}
 
 }

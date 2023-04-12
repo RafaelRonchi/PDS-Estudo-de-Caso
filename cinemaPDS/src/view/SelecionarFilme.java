@@ -96,5 +96,19 @@ public class SelecionarFilme extends JFrame {
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBounds(216, 11, 410, 46);
 		contentPane.add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("Voltar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose(); // fecha tela atual
+				JFrameMain Jmain = new JFrameMain();
+				Jmain.setLocationRelativeTo(null);
+				Jmain.setVisible(true);
+			}
+		});
+		btnNewButton.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 12));
+		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setBounds(20, 11, 98, 23);
+		contentPane.add(btnNewButton);
 	}
 }

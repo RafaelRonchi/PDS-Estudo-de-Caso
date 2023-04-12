@@ -3,11 +3,14 @@ package view;
 import java.awt.Color;
 import java.awt.EventQueue;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AssentosC2 extends JFrame {
 
@@ -48,8 +51,22 @@ public class AssentosC2 extends JFrame {
 		JLabel lblAssentosC = new JLabel("Assentos C2");
 		lblAssentosC.setForeground(Color.WHITE);
 		lblAssentosC.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 43));
-		lblAssentosC.setBounds(0, 0, 430, 49);
+		lblAssentosC.setBounds(303, 11, 248, 49);
 		contentPane.add(lblAssentosC);
+		
+		JButton btnNewButton = new JButton("Voltar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose(); // fecha tela atual
+				SelecionarSala3 selctSala = new SelecionarSala3();
+				selctSala.setLocationRelativeTo(null);
+				selctSala.setVisible(true);
+			}
+		});
+		btnNewButton.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 12));
+		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setBounds(10, 11, 98, 23);
+		contentPane.add(btnNewButton);
 	}
 
 }

@@ -52,19 +52,19 @@ public class SelecionarSala3 extends JFrame {
 		JLabel lblSelecioneUmaSala = new JLabel("Selecione uma Sala");
 		lblSelecioneUmaSala.setForeground(Color.WHITE);
 		lblSelecioneUmaSala.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 46));
-		lblSelecioneUmaSala.setBounds(220, 11, 411, 62);
+		lblSelecioneUmaSala.setBounds(216, 22, 411, 62);
 		contentPane.add(lblSelecioneUmaSala);
 		
-		JLabel lblSalaB = new JLabel("Sala C1");
-		lblSalaB.setForeground(Color.WHITE);
+		JLabel lblSalaB = new JLabel("14:50 - Sala C1");
+		lblSalaB.setForeground(Color.LIGHT_GRAY);
 		lblSalaB.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 21));
-		lblSalaB.setBounds(171, 105, 79, 29);
+		lblSalaB.setBounds(157, 105, 134, 29);
 		contentPane.add(lblSalaB);
 		
-		JLabel lblSalaB_2 = new JLabel("Sala C2");
-		lblSalaB_2.setForeground(Color.WHITE);
+		JLabel lblSalaB_2 = new JLabel("21:45 - Sala C2");
+		lblSalaB_2.setForeground(Color.LIGHT_GRAY);
 		lblSalaB_2.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 21));
-		lblSalaB_2.setBounds(565, 105, 79, 29);
+		lblSalaB_2.setBounds(528, 105, 168, 29);
 		contentPane.add(lblSalaB_2);
 		
 		JButton BtnSalaC1 = new JButton("");
@@ -84,6 +84,19 @@ public class SelecionarSala3 extends JFrame {
 		BtnSalaC2.setIcon(new ImageIcon(SelecionarSala3.class.getResource("/Images/Sala_resized.jpeg")));
 		BtnSalaC2.setBounds(445, 145, 307, 280);
 		contentPane.add(BtnSalaC2);
+		JButton btnNewButton = new JButton("Voltar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose(); // fecha tela atual
+				SelecionarFilme selctFilm = new SelecionarFilme();
+				selctFilm.setLocationRelativeTo(null);
+				selctFilm.setVisible(true);
+			}
+		});
+		btnNewButton.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 12));
+		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setBounds(10, 11, 98, 23);
+		contentPane.add(btnNewButton);
 	}
 
 }
