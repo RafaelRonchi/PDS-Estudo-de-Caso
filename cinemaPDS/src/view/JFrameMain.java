@@ -111,7 +111,16 @@ public class JFrameMain extends JFrame {
 		txtSenha.setBounds(320, 211, 260, 25);
 		contentPane.add(txtSenha);
 		
-		JButton btnLimpar = new JButton("Limpar");
+		JButton btnLimpar = new JButton("Cadastrar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String user = txtUsuario.getText();
+				String senha = txtSenha.getText();
+				
+			
+				
+			}
+		});
 		btnLimpar.setBackground(Color.WHITE);
 		btnLimpar.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 11));
 		btnLimpar.setBounds(479, 274, 105, 33);
