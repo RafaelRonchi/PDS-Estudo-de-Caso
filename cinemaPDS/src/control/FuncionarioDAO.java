@@ -21,7 +21,7 @@ public class FuncionarioDAO {
 	private FuncionarioDAO() {
 	}
 
-	public ArrayList<Funcionario> listar_funcionario() {
+	public ArrayList<Funcionario> listarFuncionario() {
 		return funcionario;
 	}
 
@@ -34,15 +34,15 @@ public class FuncionarioDAO {
 
 		return instancia;
 	}
-	public boolean inserir(Funcionario p, long cpf) {
-		for (Funcionario pessoa : funcionario) {
-			if (pessoa.getCpf() == cpf) {
-				funcionario.add(pessoa);
+	public boolean inserir(Funcionario p) {
+		Long cpf = p.getCpf();
+		if(cpf != null){
+				funcionario.add(p);
 				return true;
-			}
 		}
 		return false;
-}}
+}
+	}
 
 
 

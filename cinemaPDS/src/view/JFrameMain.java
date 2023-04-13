@@ -114,9 +114,11 @@ public class JFrameMain extends JFrame {
 		JButton btnLimpar = new JButton("Cadastrar");
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String user = txtUsuario.getText();
-				String senha = txtSenha.getText();
 				
+				dispose(); // fecha tela atual
+				CadastrarFuncionario cadas = new CadastrarFuncionario();
+				cadas.setLocationRelativeTo(null);
+				cadas.setVisible(true);
 			
 				
 			}
