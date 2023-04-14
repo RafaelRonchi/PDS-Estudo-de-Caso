@@ -15,6 +15,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Toolkit;
+import net.miginfocom.swing.MigLayout;
 
 public class JFrameMain extends JFrame {
 
@@ -46,7 +47,6 @@ public class JFrameMain extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(JFrameMain.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
 		setBackground(Color.WHITE);
 		setTitle("Sistema de Cinema");
-		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 860, 500);
 		contentPane = new JPanel();
@@ -54,62 +54,56 @@ public class JFrameMain extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-
-		JButton btnLogin = new JButton("Login");
-		btnLogin.setBackground(Color.WHITE);
-		btnLogin.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 11));
-		btnLogin.setBounds(232, 274, 113, 33);
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String user = txtUsuario.getText();
-				String senha = txtSenha.getText();
-				
-				var login = "admin";
-				
-				
-				if((user.equals(login)) && (senha.equals(login))) {
-					dispose(); // fecha tela atual
-					SelecionarFilme sf = new SelecionarFilme();
-					sf.setLocationRelativeTo(null);
-					sf.setVisible(true);
-				} else {
-					JOptionPane.showMessageDialog(null,"Usuário ou senha incorretos!");
-					txtUsuario.setText(null);
-					txtSenha.setText(null);
-				} 
-
-			}
-		});
-		contentPane.setLayout(null);
-		contentPane.add(btnLogin);
+		contentPane.setLayout(new MigLayout("", "[115px,grow][15px][105px][][105px][][115px,grow]", "[66px,grow][38px][55px][33px][][66px,grow]"));
 		
 		JLabel lblNewLabel = new JLabel("Abrir sistema");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 46));
-		lblNewLabel.setBounds(278, 43, 287, 66);
-		contentPane.add(lblNewLabel);
-		
-		txtUsuario = new JTextField();
-		txtUsuario.setBounds(320, 154, 260, 25);
-		contentPane.add(txtUsuario);
-		txtUsuario.setColumns(10);
+		contentPane.add(lblNewLabel, "cell 3 0,alignx right,growy");
 		
 		JLabel lblNewLabel_1 = new JLabel("Usuário:");
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setFont(new Font("Yu Gothic Light", Font.BOLD, 23));
-		lblNewLabel_1.setBounds(190, 149, 113, 38);
-		contentPane.add(lblNewLabel_1);
+		contentPane.add(lblNewLabel_1, "cell 2 1,growx,aligny top");
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Senha:");
-		lblNewLabel_1_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1_1.setFont(new Font("Yu Gothic Light", Font.BOLD, 23));
-		lblNewLabel_1_1.setBounds(200, 198, 105, 55);
-		contentPane.add(lblNewLabel_1_1);
+		txtUsuario = new JTextField();
+		contentPane.add(txtUsuario, "cell 3 1,growx,aligny center");
+		txtUsuario.setColumns(10);
+				
+				JLabel lblNewLabel_1_1 = new JLabel("Senha:");
+				lblNewLabel_1_1.setForeground(new Color(255, 255, 255));
+				lblNewLabel_1_1.setFont(new Font("Yu Gothic Light", Font.BOLD, 23));
+				contentPane.add(lblNewLabel_1_1, "cell 2 2,grow");
+				
+				txtSenha = new JTextField();
+				txtSenha.setColumns(10);
+				contentPane.add(txtSenha, "cell 3 2,growx,aligny center");
 		
-		txtSenha = new JTextField();
-		txtSenha.setColumns(10);
-		txtSenha.setBounds(320, 211, 260, 25);
-		contentPane.add(txtSenha);
+				JButton btnLogin = new JButton("Login");
+				btnLogin.setBackground(Color.WHITE);
+				btnLogin.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 11));
+				btnLogin.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						String user = txtUsuario.getText();
+						String senha = txtSenha.getText();
+						
+						var login = "admin";
+						
+						
+						if((user.equals(login)) && (senha.equals(login))) {
+							dispose(); // fecha tela atual
+							SelecionarFilme sf = new SelecionarFilme();
+							sf.setLocationRelativeTo(null);
+							sf.setVisible(true);
+						} else {
+							JOptionPane.showMessageDialog(null,"Usuário ou senha incorretos!");
+							txtUsuario.setText(null);
+							txtSenha.setText(null);
+						} 
+
+					}
+				});
+				contentPane.add(btnLogin, "cell 3 3,alignx center,aligny center");
 		
 		JButton btnLimpar = new JButton("Cadastrar");
 		btnLimpar.addActionListener(new ActionListener() {
@@ -125,7 +119,6 @@ public class JFrameMain extends JFrame {
 		});
 		btnLimpar.setBackground(Color.WHITE);
 		btnLimpar.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 11));
-		btnLimpar.setBounds(479, 274, 105, 33);
-		contentPane.add(btnLimpar);
+		contentPane.add(btnLimpar, "cell 3 4,alignx center,aligny top");
 	}
 }
