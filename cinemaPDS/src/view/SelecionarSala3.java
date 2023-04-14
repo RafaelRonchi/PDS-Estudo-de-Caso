@@ -72,6 +72,14 @@ public class SelecionarSala3 extends JFrame {
 		JButton BtnSalaC1 = new JButton("");
 		BtnSalaC1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			
+				dispose(); // fecha tela atual
+				AssentosC1 c1  = new AssentosC1();
+
+				c1.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				c1.setVisible(true);
+			
+			
 			}
 		});
 		BtnSalaC1.setIcon(new ImageIcon(SelecionarSala3.class.getResource("/Images/Sala_resized.jpeg")));
@@ -81,6 +89,13 @@ public class SelecionarSala3 extends JFrame {
 		JButton BtnSalaC2 = new JButton("");
 		BtnSalaC2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			
+				dispose(); // fecha tela atual
+				AssentosC2 c2  = new AssentosC2 ();
+
+				c2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				c2.setVisible(true);
+			
 			}
 		});
 		BtnSalaC2.setIcon(new ImageIcon(SelecionarSala3.class.getResource("/Images/Sala_resized.jpeg")));
