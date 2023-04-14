@@ -14,6 +14,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import net.miginfocom.swing.MigLayout;
 
 public class SelecionarFilme extends JFrame {
 
@@ -41,15 +42,13 @@ public class SelecionarFilme extends JFrame {
 	public SelecionarFilme() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(SelecionarFilme.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
 		setBackground(Color.WHITE);
-		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 860, 500);
+		setBounds(100, 100, 1047, 604);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 0, 64));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
 		JButton btnFilme1 = new JButton("");
 		btnFilme1.addActionListener(new ActionListener() {
@@ -60,10 +59,23 @@ public class SelecionarFilme extends JFrame {
 				sl1.setVisible(true);
 			}
 		});
+		contentPane.setLayout(new MigLayout("", "[36.00,grow][98px][98px][56px][36.00px][263.00px][-31.00px][36.00][252px][36.00,grow]", "[27.00,grow][][46px][337.00px][][49.00,grow]"));
+		
+		JButton btnNewButton = new JButton("Voltar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose(); // fecha tela atual
+				JFrameMain Jmain = new JFrameMain();
+				Jmain.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				Jmain.setVisible(true);
+			}
+		});
+		btnNewButton.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 12));
+		btnNewButton.setBackground(Color.WHITE);
+		contentPane.add(btnNewButton, "cell 1 1,growx,aligny top");
 		btnFilme1.setBackground(Color.WHITE);
 		btnFilme1.setIcon(new ImageIcon(SelecionarFilme.class.getResource("/Images/filme1_resized.jpeg")));
-		btnFilme1.setBounds(20, 68, 252, 359);
-		contentPane.add(btnFilme1);
+		contentPane.add(btnFilme1, "cell 1 3 3 1,growx,aligny top");
 		
 		JButton btnFilme1_1 = new JButton("");
 		btnFilme1_1.addActionListener(new ActionListener() {
@@ -76,8 +88,7 @@ public class SelecionarFilme extends JFrame {
 		});
 		btnFilme1_1.setBackground(Color.WHITE);
 		btnFilme1_1.setIcon(new ImageIcon(SelecionarFilme.class.getResource("/Images/filme2_resized.jpeg")));
-		btnFilme1_1.setBounds(297, 68, 252, 359);
-		contentPane.add(btnFilme1_1);
+		contentPane.add(btnFilme1_1, "cell 5 3,growx,aligny top");
 		
 		JButton btnFilme1_1_1 = new JButton("");
 		btnFilme1_1_1.addActionListener(new ActionListener() {
@@ -90,27 +101,11 @@ public class SelecionarFilme extends JFrame {
 		});
 		btnFilme1_1_1.setBackground(Color.WHITE);
 		btnFilme1_1_1.setIcon(new ImageIcon(SelecionarFilme.class.getResource("/Images/filmes_16093_01_resized.png")));
-		btnFilme1_1_1.setBounds(571, 68, 252, 359);
-		contentPane.add(btnFilme1_1_1);
+		contentPane.add(btnFilme1_1_1, "cell 8 3,growx,aligny top");
 		
 		JLabel lblNewLabel = new JLabel("Selecione um Filme");
 		lblNewLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 46));
 		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBounds(216, 11, 410, 46);
-		contentPane.add(lblNewLabel);
-		
-		JButton btnNewButton = new JButton("Voltar");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose(); // fecha tela atual
-				JFrameMain Jmain = new JFrameMain();
-				Jmain.setLocationRelativeTo(null);
-				Jmain.setVisible(true);
-			}
-		});
-		btnNewButton.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 12));
-		btnNewButton.setBackground(Color.WHITE);
-		btnNewButton.setBounds(20, 11, 98, 23);
-		contentPane.add(btnNewButton);
+		contentPane.add(lblNewLabel, "cell 3 2 5 1,alignx center,growy");
 	}
 }

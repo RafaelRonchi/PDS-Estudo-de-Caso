@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import control.Funcionario;
 import control.FuncionarioDAO;
 import net.miginfocom.swing.MigLayout;
+import javax.swing.SwingConstants;
 
 public class CadastrarFuncionario extends JFrame {
 
@@ -57,7 +58,7 @@ public class CadastrarFuncionario extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[16px,grow][50.00px][63.00px][291px][16px,grow]", "[][grow][53px][41px][2px][45px][23px][][135px,grow][grow]"));
+		contentPane.setLayout(new MigLayout("", "[16.00px,grow][55.00][][20.00][54.00px][][63.00px][138.00px][][16px,grow]", "[][grow][53px][][41px][2px][45px][][23px][36.00][135px,grow][grow]"));
 		
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.setBackground(new Color(255, 255, 255));
@@ -65,39 +66,60 @@ public class CadastrarFuncionario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose(); // fecha tela atual
 				JFrameMain jMain = new JFrameMain();
-				jMain.setLocationRelativeTo(null);
 				jMain.setVisible(true);
+				jMain.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				
 			}
 		});
 		contentPane.add(btnNewButton, "cell 0 0,alignx left,aligny center");
 		
-		txtNome = new JTextField();
-		contentPane.add(txtNome, "cell 3 3,growx,aligny center");
-		txtNome.setColumns(10);
-		
-		txtCpf = new JTextField();
-		contentPane.add(txtCpf, "cell 3 5,growx,aligny center");
-		txtCpf.setColumns(10);
-		
 		JLabel lblNewLabel = new JLabel("Nome:");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 20));
-		contentPane.add(lblNewLabel, "cell 2 3 1 2,alignx right,aligny center");
+		contentPane.add(lblNewLabel, "cell 1 4,alignx right,aligny center");
+		
+		txtNome = new JTextField();
+		contentPane.add(txtNome, "cell 3 4 5 1,growx,aligny center");
+		txtNome.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Cpf:");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 20));
-		contentPane.add(lblNewLabel_1, "cell 2 5,alignx right,growy");
+		contentPane.add(lblNewLabel_1, "cell 1 6,alignx right,growy");
+		
+		txtCpf = new JTextField();
+		contentPane.add(txtCpf, "cell 3 6 5 1,growx,aligny center");
+		txtCpf.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Cadastrar Funcionario");
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_2.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 30));
-		contentPane.add(lblNewLabel_2, "cell 2 2 2 1,alignx center,growy");
+		lblNewLabel_2.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 35));
+		contentPane.add(lblNewLabel_2, "cell 3 2 5 1,alignx center,growy");
+		
+				
+				
+				JButton btnCadastrar = new JButton("Cadastar");
+				btnCadastrar.setBackground(new Color(255, 255, 255));
+				btnCadastrar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Long cpf = Long.parseLong(txtCpf.getText());
+						String nome = txtNome.getText();
+						
+						Funcionario funcio = new Funcionario();
+						
+						funcio.setCpf(cpf);
+						funcio.setNome(nome);
+						
+						funcionarioDAO.inserir(funcio);
+					}
+				});
+				contentPane.add(btnCadastrar, "cell 2 8 2 1,alignx left,aligny top");
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
-		contentPane.add(panel, "cell 2 8 2 1,grow");
+		contentPane.add(panel, "cell 1 10 8 1,grow");
 		panel.setLayout(new MigLayout("", "[100px,grow][100px,grow]", "[grow]"));
 
 		table = new JTable();
@@ -109,25 +131,6 @@ public class CadastrarFuncionario extends JFrame {
 		    }
 		));
 		panel.add(table, "cell 0 0 2 1,grow");
-
-		
-		
-		JButton btnCadastrar = new JButton("Cadastar");
-		btnCadastrar.setBackground(new Color(255, 255, 255));
-		btnCadastrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Long cpf = Long.parseLong(txtCpf.getText());
-				String nome = txtNome.getText();
-				
-				Funcionario funcio = new Funcionario();
-				
-				funcio.setCpf(cpf);
-				funcio.setNome(nome);
-				
-				funcionarioDAO.inserir(funcio);
-			}
-		});
-		contentPane.add(btnCadastrar, "cell 2 6,alignx left,aligny top");
 		
 		
 		JButton btnListar = new JButton("Listar Cadastros");
@@ -146,6 +149,6 @@ public class CadastrarFuncionario extends JFrame {
 				
 			}
 		});
-		contentPane.add(btnListar, "cell 3 6,alignx right,aligny top");
+		contentPane.add(btnListar, "cell 7 8,alignx right,aligny top");
 	}
 }
