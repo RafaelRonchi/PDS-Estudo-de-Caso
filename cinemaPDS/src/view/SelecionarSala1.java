@@ -61,7 +61,11 @@ public class SelecionarSala1 extends JFrame {
 		BtnSalaA1.setBackground(Color.BLACK);
 		BtnSalaA1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				dispose(); // fecha tela atual
+				AssentosA1 a1  = new AssentosA1 ();
+
+				a1.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				a1.setVisible(true);
 			}
 		});
 		BtnSalaA1.setIcon(new ImageIcon(SelecionarSala1.class.getResource("/Images/Sala_resized.jpeg")));
@@ -78,6 +82,13 @@ public class SelecionarSala1 extends JFrame {
 		BtnSalaA2.setBackground(Color.BLACK);
 		BtnSalaA2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+			
+						dispose(); // fecha tela atual
+						AssentosA2 a2  = new AssentosA2 ();
+
+						a2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+						a2.setVisible(true);
 			}
 		});
 		BtnSalaA2.setIcon(new ImageIcon(SelecionarSala1.class.getResource("/Images/Sala_resized.jpeg")));
