@@ -62,30 +62,33 @@ public class JFrameMain extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[115px,grow][84.00px][97.00px][][134px][105px][78.00][67.00][115px,grow]", "[66px,grow][68.00px][87.00px][55.00][][35.00][18.00][36.00][66px,grow]"));
+		contentPane.setLayout(new MigLayout("", "[133.00px,grow 50][97.00px,grow][grow 34][134px,grow][115px,grow 50]", "[66px,grow][68.00px][87.00px][55.00][36.00,grow][32.00][66px,grow]"));
 		
 		JLabel lblNewLabel = new JLabel("Abrir sistema");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 51));
-		contentPane.add(lblNewLabel, "cell 2 1 5 1,alignx center,growy");
+		lblNewLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 66));
+		contentPane.add(lblNewLabel, "cell 0 0 5 2,growx,aligny center");
 				
 				JLabel lblNewLabel_1 = new JLabel("Nome:");
+				lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 				lblNewLabel_1.setForeground(new Color(255, 255, 255));
-				lblNewLabel_1.setFont(new Font("Yu Gothic Light", Font.BOLD, 23));
-				contentPane.add(lblNewLabel_1, "cell 2 2,alignx center,growy");
+				lblNewLabel_1.setFont(new Font("Yu Gothic Light", Font.BOLD, 30));
+				contentPane.add(lblNewLabel_1, "cell 1 2,growx,aligny center");
 				
 				txtUsuario = new JTextField();
-				contentPane.add(txtUsuario, "cell 4 2 2 1,growx,aligny center");
+				contentPane.add(txtUsuario, "cell 2 2 2 1,growx,aligny center");
 				txtUsuario.setColumns(10);
 				
 				JLabel lblNewLabel_1_1 = new JLabel("Cpf:");
+				lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
 				lblNewLabel_1_1.setForeground(new Color(255, 255, 255));
-				lblNewLabel_1_1.setFont(new Font("Yu Gothic Light", Font.BOLD, 23));
-				contentPane.add(lblNewLabel_1_1, "cell 2 3,alignx center,aligny center");
+				lblNewLabel_1_1.setFont(new Font("Yu Gothic Light", Font.BOLD, 30));
+				contentPane.add(lblNewLabel_1_1, "cell 1 3,growx,aligny center");
 				
 				txtSenha = new JTextField();
 				txtSenha.setColumns(10);
-				contentPane.add(txtSenha, "cell 4 3 2 1,growx,aligny center");
+				contentPane.add(txtSenha, "cell 2 3 2 1,growx,aligny center");
 				
 				
 						JButton btnLogin = new JButton("Login");
@@ -121,7 +124,7 @@ public class JFrameMain extends JFrame {
 
 							}
 						});
-						contentPane.add(btnLogin, "cell 4 5 2 1,growx,aligny top");
+						contentPane.add(btnLogin, "cell 1 5,grow");
 				
 				JButton btnLimpar = new JButton("Cadastrar novo usuário");
 				btnLimpar.addActionListener(new ActionListener() {
@@ -134,8 +137,13 @@ public class JFrameMain extends JFrame {
 						
 					}
 				});
+				
+				JLabel lblNewLabel_2 = new JLabel("ou");
+				lblNewLabel_2.setForeground(new Color(255, 255, 255));
+				lblNewLabel_2.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 18));
+				contentPane.add(lblNewLabel_2, "cell 2 5,alignx center,aligny center");
 				btnLimpar.setBackground(Color.WHITE);
 				btnLimpar.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 11));
-				contentPane.add(btnLimpar, "cell 4 7 2 1,growx,aligny top");
+				contentPane.add(btnLimpar, "cell 3 5,grow");
 	}
 }

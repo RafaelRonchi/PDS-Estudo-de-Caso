@@ -29,6 +29,7 @@ public class SelecionarFilme extends JFrame {
 				try {
 					SelecionarFilme frame = new SelecionarFilme();
 					frame.setVisible(true);
+					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -43,7 +44,7 @@ public class SelecionarFilme extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(SelecionarFilme.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1047, 604);
+		setBounds(100, 100, 1139, 604);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 0, 64));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -59,7 +60,7 @@ public class SelecionarFilme extends JFrame {
 				sl1.setVisible(true);
 			}
 		});
-		contentPane.setLayout(new MigLayout("", "[36.00,grow][98px][98px][56px][36.00px][263.00px][-31.00px][36.00][252px][36.00,grow]", "[27.00,grow][][46px][337.00px][][49.00,grow]"));
+		contentPane.setLayout(new MigLayout("", "[36.00,grow][52px][200.00px][36.00px][36.00px][252.00px][36.00px][36.00][252px][36.00,grow]", "[27.00,grow][][54.00px][36.00][337.00px,grow][][49.00,grow]"));
 		
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -72,10 +73,10 @@ public class SelecionarFilme extends JFrame {
 		});
 		btnNewButton.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 12));
 		btnNewButton.setBackground(Color.WHITE);
-		contentPane.add(btnNewButton, "cell 1 1,growx,aligny top");
+		contentPane.add(btnNewButton, "cell 0 0 2 1,alignx left,aligny top");
 		btnFilme1.setBackground(Color.WHITE);
 		btnFilme1.setIcon(new ImageIcon(SelecionarFilme.class.getResource("/Images/filme1_resized.jpeg")));
-		contentPane.add(btnFilme1, "cell 1 3 3 1,growx,aligny top");
+		contentPane.add(btnFilme1, "cell 1 4 2 1,grow");
 		
 		JButton btnFilme1_1 = new JButton("");
 		btnFilme1_1.addActionListener(new ActionListener() {
@@ -88,7 +89,7 @@ public class SelecionarFilme extends JFrame {
 		});
 		btnFilme1_1.setBackground(Color.WHITE);
 		btnFilme1_1.setIcon(new ImageIcon(SelecionarFilme.class.getResource("/Images/filme2_resized.jpeg")));
-		contentPane.add(btnFilme1_1, "cell 5 3,growx,aligny top");
+		contentPane.add(btnFilme1_1, "cell 5 4,grow");
 		
 		JButton btnFilme1_1_1 = new JButton("");
 		btnFilme1_1_1.addActionListener(new ActionListener() {
@@ -101,11 +102,11 @@ public class SelecionarFilme extends JFrame {
 		});
 		btnFilme1_1_1.setBackground(Color.WHITE);
 		btnFilme1_1_1.setIcon(new ImageIcon(SelecionarFilme.class.getResource("/Images/filmes_16093_01_resized.png")));
-		contentPane.add(btnFilme1_1_1, "cell 8 3,growx,aligny top");
+		contentPane.add(btnFilme1_1_1, "cell 8 4,grow");
 		
 		JLabel lblNewLabel = new JLabel("Selecione um Filme");
 		lblNewLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 46));
 		lblNewLabel.setForeground(Color.WHITE);
-		contentPane.add(lblNewLabel, "cell 3 2 5 1,alignx center,growy");
+		contentPane.add(lblNewLabel, "cell 3 0 5 3,alignx center,aligny center");
 	}
 }
