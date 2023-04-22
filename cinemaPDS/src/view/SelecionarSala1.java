@@ -60,7 +60,6 @@ public class SelecionarSala1 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose(); // fecha tela atual
 				SelecionarFilme selctFilm = new SelecionarFilme();
-				selctFilm.setLocationRelativeTo(null);
 				selctFilm.setVisible(true);
 				selctFilm.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			}

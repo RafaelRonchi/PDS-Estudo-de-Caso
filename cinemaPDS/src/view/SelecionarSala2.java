@@ -66,6 +66,7 @@ public class SelecionarSala2 extends JFrame {
 		contentPane.add(lblSalaB, "cell 1 3,growx,aligny center");
 		
 		JButton BtnSalaB1 = new JButton("");
+		BtnSalaB1.setBackground(new Color(255, 255, 255));
 		BtnSalaB1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		
@@ -89,8 +90,8 @@ public class SelecionarSala2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose(); // fecha tela atual
 				SelecionarFilme selctFilm = new SelecionarFilme();
-				selctFilm.setLocationRelativeTo(null);
 				selctFilm.setVisible(true);
+				selctFilm.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			}
 		});
 		btnNewButton.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 12));
