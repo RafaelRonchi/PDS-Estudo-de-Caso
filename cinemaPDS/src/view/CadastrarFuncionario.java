@@ -20,6 +20,8 @@ import control.Funcionario;
 import control.FuncionarioDAO;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.SwingConstants;
+import javax.swing.JSeparator;
+
 
 public class CadastrarFuncionario extends JFrame {
 
@@ -52,13 +54,13 @@ public class CadastrarFuncionario extends JFrame {
 	 */
 	public CadastrarFuncionario() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 860, 500);
+		setBounds(100, 100, 974, 548);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 0, 64));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[16.00px,grow][55.00][][20.00][54.00px][][63.00px][138.00px][][16px,grow]", "[][grow][53px][][41px][2px][45px][][23px][36.00][135px,grow][grow]"));
+		contentPane.setLayout(new MigLayout("", "[100.00px,grow 71][138.00px,grow][][138.00px,grow][16px,grow]", "[grow][53px][grow][41px][22.00px][45px][grow][23px][36.00][130.00px,grow][grow]"));
 		
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.setBackground(new Color(255, 255, 255));
@@ -71,32 +73,33 @@ public class CadastrarFuncionario extends JFrame {
 				
 			}
 		});
-		contentPane.add(btnNewButton, "cell 0 0,alignx left,aligny center");
+		contentPane.add(btnNewButton, "cell 0 0,alignx left,aligny top");
 		
 		JLabel lblNewLabel = new JLabel("Nome:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 20));
-		contentPane.add(lblNewLabel, "cell 1 4,alignx right,aligny center");
+		lblNewLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 30));
+		contentPane.add(lblNewLabel, "cell 1 3,alignx center,aligny center");
 		
 		txtNome = new JTextField();
-		contentPane.add(txtNome, "cell 3 4 5 1,growx,aligny center");
+		contentPane.add(txtNome, "cell 3 3,growx,aligny center");
 		txtNome.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Cpf:");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 20));
-		contentPane.add(lblNewLabel_1, "cell 1 6,alignx right,growy");
+		lblNewLabel_1.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 30));
+		contentPane.add(lblNewLabel_1, "cell 1 5,alignx center,growy");
 		
 		txtCpf = new JTextField();
-		contentPane.add(txtCpf, "cell 3 6 5 1,growx,aligny center");
+		contentPane.add(txtCpf, "cell 3 5,growx,aligny center");
 		txtCpf.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Cadastrar Funcionario");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_2.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 35));
-		contentPane.add(lblNewLabel_2, "cell 3 2 5 1,alignx center,growy");
+		lblNewLabel_2.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 66));
+		contentPane.add(lblNewLabel_2, "cell 1 0 3 3,alignx center,growy");
 		
 				
 				
@@ -115,22 +118,7 @@ public class CadastrarFuncionario extends JFrame {
 						funcionarioDAO.inserir(funcio);
 					}
 				});
-				contentPane.add(btnCadastrar, "cell 2 8 2 1,alignx left,aligny top");
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 255, 255));
-		contentPane.add(panel, "cell 1 10 8 1,grow");
-		panel.setLayout(new MigLayout("", "[100px,grow][100px,grow]", "[grow]"));
-
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-		    new Object[][] {
-		    },
-		    new String[] {
-		        "CPF", "Nome"
-		    }
-		));
-		panel.add(table, "cell 0 0 2 1,grow");
+				contentPane.add(btnCadastrar, "cell 1 7,alignx center,growy");
 		
 		
 		JButton btnListar = new JButton("Listar Cadastros");
@@ -149,6 +137,32 @@ public class CadastrarFuncionario extends JFrame {
 				
 			}
 		});
-		contentPane.add(btnListar, "cell 7 8,alignx right,aligny top");
+		contentPane.add(btnListar, "cell 3 7,alignx center,growy");
+
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
+		contentPane.add(panel, "cell 1 9 3 1,grow");
+		panel.setLayout(new MigLayout("", "[100px,grow][][100px,grow]", "[20px][grow]"));
+
+		JLabel cpfLabel = new JLabel("CPF");
+		panel.add(cpfLabel, "cell 0 0, width 50, alignx center, aligny center");
+		
+				JSeparator separator = new JSeparator(SwingConstants.VERTICAL);
+				panel.add(separator, "cell 1 0,width 4,alignx center,growy");
+
+		JLabel nomeLabel = new JLabel("Nome");
+		panel.add(nomeLabel, "cell 2 0,width 50,alignx center,aligny center");
+
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+		    new Object[][] {
+		    },
+		    new String[] {
+		        "CPF", "Nome"
+		    }
+		));
+		panel.add(table, "cell 0 1 3 1,grow");
+
+
 	}
 }
