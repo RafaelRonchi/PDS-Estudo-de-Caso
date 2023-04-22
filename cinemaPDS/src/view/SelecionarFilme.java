@@ -56,7 +56,7 @@ public class SelecionarFilme extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose(); // fecha tela atual
 				SelecionarSala1 sl1 = new SelecionarSala1();
-				sl1.setLocationRelativeTo(null);
+				sl1.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				sl1.setVisible(true);
 			}
 		});
@@ -83,7 +83,7 @@ public class SelecionarFilme extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose(); // fecha tela atual
 				SelecionarSala2 sl2 = new SelecionarSala2();
-				sl2.setLocationRelativeTo(null);
+				sl2.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				sl2.setVisible(true);
 			}
 		});
@@ -96,7 +96,7 @@ public class SelecionarFilme extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose(); // fecha tela atual
 				SelecionarSala3 sl3 = new SelecionarSala3();
-				sl3.setLocationRelativeTo(null);
+				sl3.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				sl3.setVisible(true);
 			}
 		});
