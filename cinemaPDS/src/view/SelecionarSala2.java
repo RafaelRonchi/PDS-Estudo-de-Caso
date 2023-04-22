@@ -13,6 +13,8 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.SwingConstants;
 
 public class SelecionarSala2 extends JFrame {
 
@@ -27,6 +29,7 @@ public class SelecionarSala2 extends JFrame {
 				try {
 					SelecionarSala2 frame = new SelecionarSala2();
 					frame.setVisible(true);
+					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,32 +45,25 @@ public class SelecionarSala2 extends JFrame {
 		setBackground(Color.WHITE);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 860, 500);
+		setBounds(100, 100, 1056, 612);
 		contentPane = new JPanel();
 
 		contentPane.setBackground(new Color(0, 0, 64));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new MigLayout("", "[grow][278px,grow][grow 50][278px,grow][grow]", "[20.00px,grow][31.00][24.00][35.00px][150px,grow][51.00,grow]"));
 		
 		JLabel lblSelecioneUmaSala = new JLabel("Selecione uma Sala");
 		lblSelecioneUmaSala.setForeground(Color.WHITE);
 		lblSelecioneUmaSala.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 46));
-		lblSelecioneUmaSala.setBounds(216, 28, 411, 62);
-		contentPane.add(lblSelecioneUmaSala);
+		contentPane.add(lblSelecioneUmaSala, "cell 0 1 5 1,alignx center,aligny bottom");
 		
 		JLabel lblSalaB = new JLabel("10:50 - Sala B1");
+		lblSalaB.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSalaB.setForeground(Color.LIGHT_GRAY);
 		lblSalaB.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 21));
-		lblSalaB.setBounds(149, 105, 144, 29);
-		contentPane.add(lblSalaB);
-		
-		JLabel lblSalaB_2 = new JLabel("15:20 - Sala B2");
-		lblSalaB_2.setForeground(Color.LIGHT_GRAY);
-		lblSalaB_2.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 21));
-		lblSalaB_2.setBounds(534, 105, 152, 29);
-		contentPane.add(lblSalaB_2);
+		contentPane.add(lblSalaB, "cell 1 3,growx,aligny center");
 		
 		JButton BtnSalaB1 = new JButton("");
 		BtnSalaB1.addActionListener(new ActionListener() {
@@ -80,24 +76,14 @@ public class SelecionarSala2 extends JFrame {
 				b1.setVisible(true);
 			}
 		});
-		BtnSalaB1.setIcon(new ImageIcon(SelecionarSala2.class.getResource("/Images/Sala_resized.jpeg")));
-		BtnSalaB1.setBounds(66, 145, 307, 280);
-		contentPane.add(BtnSalaB1);
 		
-		JButton BtnSalaB2 = new JButton("");
-		BtnSalaB2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose(); // fecha tela atual
-				AssentosB2 b2  = new AssentosB2 ();
-
-				b2.setExtendedState(JFrame.MAXIMIZED_BOTH);
-				b2.setVisible(true);
-			
-			}
-		});
-		BtnSalaB2.setIcon(new ImageIcon(SelecionarSala2.class.getResource("/Images/Sala_resized.jpeg")));
-		BtnSalaB2.setBounds(445, 145, 307, 280);
-		contentPane.add(BtnSalaB2);
+		JLabel lblSalaB_2 = new JLabel("15:20 - Sala B2");
+		lblSalaB_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSalaB_2.setForeground(Color.LIGHT_GRAY);
+		lblSalaB_2.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 21));
+		contentPane.add(lblSalaB_2, "cell 3 3,growx,aligny center");
+		BtnSalaB1.setIcon(new ImageIcon(SelecionarSala2.class.getResource("/Images/Sala_resized.jpeg")));
+		contentPane.add(BtnSalaB1, "cell 1 4,grow");
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -109,8 +95,22 @@ public class SelecionarSala2 extends JFrame {
 		});
 		btnNewButton.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 12));
 		btnNewButton.setBackground(Color.WHITE);
-		btnNewButton.setBounds(10, 11, 98, 23);
-		contentPane.add(btnNewButton);
+		contentPane.add(btnNewButton, "cell 0 0,alignx left,aligny top");
+		
+		JButton BtnSalaB2 = new JButton("");
+		BtnSalaB2.setBackground(new Color(255, 255, 255));
+		BtnSalaB2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose(); // fecha tela atual
+				AssentosB2 b2  = new AssentosB2 ();
+
+				b2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				b2.setVisible(true);
+			
+			}
+		});
+		BtnSalaB2.setIcon(new ImageIcon(SelecionarSala2.class.getResource("/Images/Sala_resized.jpeg")));
+		contentPane.add(BtnSalaB2, "cell 3 4,grow");
 	}
 
 }
