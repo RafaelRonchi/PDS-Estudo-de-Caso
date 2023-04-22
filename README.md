@@ -25,7 +25,7 @@ O projeto utiliza as seguintes tecnologias:
 
 Para executar o projeto, basta seguir os seguintes passos:
 
-1. Abra o projeto.
+1. Abra o projeto em ambiente Windows.
 2. Compile e execute o arquivo `JFrameMain.java`.
 3. Utilize as funcionalidades da aplicação através das telas de cadastro de funcionários e alocação de assentos. 
 
