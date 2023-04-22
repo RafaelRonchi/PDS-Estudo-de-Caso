@@ -60,7 +60,7 @@ public class SelecionarFilme extends JFrame {
 				sl1.setVisible(true);
 			}
 		});
-		contentPane.setLayout(new MigLayout("", "[36.00,grow][52px][200.00px][36.00px][36.00px][252.00px][36.00px][36.00][252px][36.00,grow]", "[27.00,grow][][54.00px][36.00][337.00px,grow][][49.00,grow]"));
+		contentPane.setLayout(new MigLayout("", "[36.00,grow][200.00px,grow][36.00px][36.00px][252.00px,grow][36.00px][36.00][252px,grow][36.00,grow]", "[27.00,grow][][54.00px][36.00][337.00px,grow][][49.00,grow]"));
 		
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -73,10 +73,10 @@ public class SelecionarFilme extends JFrame {
 		});
 		btnNewButton.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 12));
 		btnNewButton.setBackground(Color.WHITE);
-		contentPane.add(btnNewButton, "cell 0 0 2 1,alignx left,aligny top");
+		contentPane.add(btnNewButton, "cell 0 0,alignx left,aligny top");
 		btnFilme1.setBackground(Color.WHITE);
 		btnFilme1.setIcon(new ImageIcon(SelecionarFilme.class.getResource("/Images/filme1_resized.jpeg")));
-		contentPane.add(btnFilme1, "cell 1 4 2 1,grow");
+		contentPane.add(btnFilme1, "cell 1 4,grow");
 		
 		JButton btnFilme1_1 = new JButton("");
 		btnFilme1_1.addActionListener(new ActionListener() {
@@ -89,7 +89,7 @@ public class SelecionarFilme extends JFrame {
 		});
 		btnFilme1_1.setBackground(Color.WHITE);
 		btnFilme1_1.setIcon(new ImageIcon(SelecionarFilme.class.getResource("/Images/filme2_resized.jpeg")));
-		contentPane.add(btnFilme1_1, "cell 5 4,grow");
+		contentPane.add(btnFilme1_1, "cell 4 4,grow");
 		
 		JButton btnFilme1_1_1 = new JButton("");
 		btnFilme1_1_1.addActionListener(new ActionListener() {
@@ -102,11 +102,11 @@ public class SelecionarFilme extends JFrame {
 		});
 		btnFilme1_1_1.setBackground(Color.WHITE);
 		btnFilme1_1_1.setIcon(new ImageIcon(SelecionarFilme.class.getResource("/Images/filmes_16093_01_resized.png")));
-		contentPane.add(btnFilme1_1_1, "cell 8 4,grow");
+		contentPane.add(btnFilme1_1_1, "cell 7 4,grow");
 		
 		JLabel lblNewLabel = new JLabel("Selecione um Filme");
 		lblNewLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 46));
 		lblNewLabel.setForeground(Color.WHITE);
-		contentPane.add(lblNewLabel, "cell 3 0 5 3,alignx center,aligny center");
+		contentPane.add(lblNewLabel, "cell 2 0 5 3,alignx center,aligny center");
 	}
 }
