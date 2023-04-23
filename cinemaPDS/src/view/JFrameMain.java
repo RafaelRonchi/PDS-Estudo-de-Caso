@@ -22,6 +22,8 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class JFrameMain extends JFrame {
 
@@ -36,6 +38,12 @@ public class JFrameMain extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				try {
+		            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+		                | UnsupportedLookAndFeelException e) {
+		            // LAF Windows não encontrado, usar o LAF padrão do sistema
+		        }
 				try {
 					JFrameMain frame = new JFrameMain();
 					frame.setVisible(true);
