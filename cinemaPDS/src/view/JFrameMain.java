@@ -103,18 +103,21 @@ public class JFrameMain extends JFrame {
 								
 								
 								for (Funcionario funcionario : lista) {
+									
 									if((funcionario.getNome()).equals(user) && (funcionario.getCpf()).equals(cpf)) {
 										dispose(); // fecha tela atual
 										SelecionarFilme sf = new SelecionarFilme();
 										sf.setVisible(true);
 										sf.setExtendedState(JFrame.MAXIMIZED_BOTH);
 										 entrou = true;
-									}else {
-									entrou = false;
+										 break;
+									}
+									else{
+										entrou = false;
 									}
 								}
 								
-								if(entrou != true) {
+								if(entrou == false) {
 									JOptionPane.showMessageDialog(null,"Nome ou CPF incorretos ou não cadastrado!");
 									txtUsuario.setText(null);
 									txtSenha.setText(null);
