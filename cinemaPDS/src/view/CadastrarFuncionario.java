@@ -30,7 +30,7 @@ public class CadastrarFuncionario extends JFrame {
 	private JTextField txtCpf;
 	private JTable table;
 	private FuncionarioDAO funcionarioDAO = FuncionarioDAO.getInstancia();
-	private Funcionario funcio = new Funcionario();
+	
 	
 
 	/**
@@ -108,6 +108,9 @@ public class CadastrarFuncionario extends JFrame {
 				btnCadastrar.setBackground(new Color(255, 255, 255));
 				btnCadastrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						 Funcionario funcio = new Funcionario();
+
+						
 						Long cpf = Long.parseLong(txtCpf.getText());
 						String nome = txtNome.getText();
 						
@@ -162,11 +165,13 @@ public class CadastrarFuncionario extends JFrame {
 		    }
 		));
 		panel.add(table, "cell 0 1 3 1,grow");
-
+		
 		JButton btnExcluir = new JButton("Excluir");
+		contentPane.add(btnExcluir, "cell 1 10,alignx center,aligny center");
 		btnExcluir.setBackground(new Color(255, 255, 255));
 		btnExcluir.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
+				 Funcionario funcio = new Funcionario();
 		        int selectedRow = table.getSelectedRow(); //pega a linha selecionada na tabela
 		        if (selectedRow != -1) { //se alguma linha foi selecionada
 		            funcionarioDAO.remover(funcio);
@@ -174,7 +179,26 @@ public class CadastrarFuncionario extends JFrame {
 		        }
 		    }
 		});
-		panel.add(btnExcluir);
+		
+		
+		JButton btnAlterar= new JButton("Alterar");
+		contentPane.add(btnAlterar, "cell 3 10,alignx center,aligny center");
+		btnAlterar.setBackground(new Color(255, 255, 255));
+		btnAlterar.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+				 Funcionario funcio = new Funcionario();
+				int selectedRow = table.getSelectedRow(); //pega a linha selecionada na tabela
+		        if (selectedRow != -1) { //se alguma linha foi selecionada
+		        	Long cpf = Long.parseLong(txtCpf.getText());
+					String nome = txtNome.getText();
+					funcio.setCpf(cpf);
+					funcio.setNome(nome);
+					funcionarioDAO.alterar(funcio);
+		        }
+		    }
+		});
+		
+
 
 	}
 }
