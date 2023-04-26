@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.font.TextLayout;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
@@ -17,7 +18,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.SwingConstants;
 
 public class AssentosA1 extends JFrame {
-
+	static Integer  nBanco= null;
 	private JPanel contentPane;
 
 	/**
@@ -81,11 +82,40 @@ public class AssentosA1 extends JFrame {
 				btn1.setIcon(new ImageIcon(AssentosA1.class.getResource("/Images/24868_redmensioned.jpeg")));
 				btn1.setBackground(Color.WHITE);
 				contentPane.add(btn1, "cell 2 3,grow");
-		
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						nBanco = 1;	//valor que vai ser passado para a tela de compra
+						int  refBanco = nBanco;
+						//esse valor vai constar incrementado (manualmente) em cada instancia da classe Jbutton 
+					
+						
+						
+						dispose(); // fecha tela atual
+						TelaCompraBanco telaCompra = new TelaCompraBanco();
+						 telaCompra.setExtendedState(JFrame.MAXIMIZED_BOTH);
+						 telaCompra.setVisible(true);
+						 
+					}
+				});
 		JButton btn2 = new JButton("");
+		
 		btn2.setBackground(Color.WHITE);
 		btn2.setIcon(new ImageIcon(AssentosA1.class.getResource("/Images/24868_redmensioned.jpeg")));
 		contentPane.add(btn2, "cell 4 3,grow");
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose(); // fecha tela atual
+				TelaCompraBanco telaCompra = new TelaCompraBanco();
+				 telaCompra.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				 telaCompra.setVisible(true);
+				 
+				 
+				 
+				 
+				 
+			}
+		});
 		
 		JButton btn3 = new JButton("");
 		btn3.setIcon(new ImageIcon(AssentosA1.class.getResource("/Images/24868_redmensioned.jpeg")));
