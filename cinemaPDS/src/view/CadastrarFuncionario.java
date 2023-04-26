@@ -30,6 +30,7 @@ public class CadastrarFuncionario extends JFrame {
 	private JTextField txtCpf;
 	private JTable table;
 	private FuncionarioDAO funcionarioDAO = FuncionarioDAO.getInstancia();
+	private Funcionario funcio = new Funcionario();
 	
 
 	/**
@@ -110,7 +111,6 @@ public class CadastrarFuncionario extends JFrame {
 						Long cpf = Long.parseLong(txtCpf.getText());
 						String nome = txtNome.getText();
 						
-						Funcionario funcio = new Funcionario();
 						
 						funcio.setCpf(cpf);
 						funcio.setNome(nome);
@@ -163,6 +163,18 @@ public class CadastrarFuncionario extends JFrame {
 		));
 		panel.add(table, "cell 0 1 3 1,grow");
 
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.setBackground(new Color(255, 255, 255));
+		btnExcluir.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        int selectedRow = table.getSelectedRow(); //pega a linha selecionada na tabela
+		        if (selectedRow != -1) { //se alguma linha foi selecionada
+		            funcionarioDAO.remover(funcio);
+		            ((DefaultTableModel) table.getModel()).removeRow(selectedRow); //remove a linha da tabela
+		        }
+		    }
+		});
+		panel.add(btnExcluir);
 
 	}
 }
