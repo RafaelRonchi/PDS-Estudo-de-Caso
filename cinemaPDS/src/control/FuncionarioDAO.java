@@ -35,12 +35,16 @@ public class FuncionarioDAO {
 		return instancia;
 	}
 	public boolean inserir(Funcionario p) {
-		Long cpf = p.getCpf();
-		if(cpf != null){
-				funcionario.add(p);
-				return true;
-		}
-		return false;
+		
+		 for (int i = 0; i < funcionario.size(); i++) {
+		        Funcionario antigoFuncionario = funcionario.get(i);
+		        if (antigoFuncionario.getCpf().equals(p.getCpf())) {
+		            return false;
+		        }
+		    }
+		 funcionario.add(p);
+		 return true;
+		 
 }
 	public boolean remover(Funcionario f) {
 	    boolean removido = funcionario.remove(f);
