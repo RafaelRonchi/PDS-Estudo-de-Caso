@@ -68,6 +68,8 @@ public class AssentosA1 extends JFrame {
 		btnNewButton.setBackground(Color.WHITE);
 		contentPane.add(btnNewButton, "cell 0 0,alignx left,aligny top");
 		
+		
+		
 		JLabel lblAssentosA = new JLabel("Assentos A1");
 		lblAssentosA.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAssentosA.setForeground(Color.WHITE);
@@ -256,6 +258,12 @@ public class AssentosA1 extends JFrame {
 				btn31.setBackground(Color.WHITE);
 				contentPane.add(btn31, "cell 9 6,grow");
 
+				
+				
+				
+				
+				
+				
 		
 	}
 }

@@ -1,5 +1,7 @@
 package modelo;
 import java.util.ArrayList;
+
+
 public class ClienteDAO {
 	private static ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 	private static ClienteDAO instancia;
@@ -8,9 +10,6 @@ public class ClienteDAO {
 		return clientes;
 	}
 
-	public static void setCliente(ArrayList<Cliente> cliente) {
-		ClienteDAO.clientes = cliente;
-	}
 
 	private ClienteDAO() {
 	}
@@ -25,7 +24,21 @@ public class ClienteDAO {
 			instancia = new ClienteDAO();
 			clientes = new ArrayList<>();
 		}
-
+		
 		return instancia;
 	}
+	
+	
+	public boolean inserir(Cliente c) {
+		if (c != null) {
+			clientes.add(c);
+			return true;
+		
+		}
+		
+		return false;
+	}
+	
+	
+
 }
