@@ -120,13 +120,17 @@ public class TelaCompraBanco extends JFrame {
 				
 				
 				//fazer validação
+			 
+			dispose();
 				
+               
 			
+                
+			//fazer o registro da compra
 				
-                       
-                 
-				// retornar um método com um valor referenciando o banco
-				// dispose
+			// retornar um método com um valor referenciando o banco
+				
+			// dispose
 			}
 		});
 		
