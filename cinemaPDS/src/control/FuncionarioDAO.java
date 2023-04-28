@@ -2,11 +2,8 @@ package control;
 
 import java.util.ArrayList;
 
-import modelo.Cliente;
-
 public class FuncionarioDAO {
 
-	
 	private static ArrayList<Funcionario> funcionario = new ArrayList<>();
 	private static FuncionarioDAO instancia;
 
@@ -15,7 +12,7 @@ public class FuncionarioDAO {
 	}
 
 	public static void setfuncionario(ArrayList<Funcionario> funcionario) {
-	FuncionarioDAO.funcionario = funcionario;
+		FuncionarioDAO.funcionario = funcionario;
 	}
 
 	private FuncionarioDAO() {
@@ -34,35 +31,34 @@ public class FuncionarioDAO {
 
 		return instancia;
 	}
+
 	public boolean inserir(Funcionario p) {
-		
-		 for (int i = 0; i < funcionario.size(); i++) {
-		        Funcionario antigoFuncionario = funcionario.get(i);
-		        if (antigoFuncionario.getCpf().equals(p.getCpf())) {
-		            return false;
-		        }
-		    }
-		 funcionario.add(p);
-		 return true;
-		 
-}
+
+		for (int i = 0; i < funcionario.size(); i++) {
+			Funcionario antigoFuncionario = funcionario.get(i);
+			if (antigoFuncionario.getCpf().equals(p.getCpf())) {
+				return false;
+			}
+		}
+		funcionario.add(p);
+		return true;
+
+	}
+
 	public boolean remover(Funcionario f) {
-	    boolean removido = funcionario.remove(f);
-	    return removido;
+		boolean removido = funcionario.remove(f);
+		return removido;
 	}
+
 	public boolean alterar(Funcionario novoFuncionario) {
-	    for (int i = 0; i < funcionario.size(); i++) {
-	        Funcionario antigoFuncionario = funcionario.get(i);
-	        if (antigoFuncionario.getCpf().equals(novoFuncionario.getCpf())) {
-	            funcionario.set(i, novoFuncionario);
-	            return true;
-	        }
-	    }
-	    return false;
+		for (int i = 0; i < funcionario.size(); i++) {
+			Funcionario antigoFuncionario = funcionario.get(i);
+			if (antigoFuncionario.getCpf().equals(novoFuncionario.getCpf())) {
+				funcionario.set(i, novoFuncionario);
+				return true;
+			}
+		}
+		return false;
 	}
 
-
-	}
-
-
-
+}
