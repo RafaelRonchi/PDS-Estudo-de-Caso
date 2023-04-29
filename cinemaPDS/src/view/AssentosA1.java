@@ -97,7 +97,7 @@ public class AssentosA1 extends JFrame {
 				
 				btn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						CadastroAssentos selctSala = new CadastroAssentos();
+						CadastroAssentos selctSala = new CadastroAssentos(finalRow, finalCol);
 						dispose();
 						selctSala.setExtendedState(JFrame.MAXIMIZED_BOTH);
 						selctSala.setVisible(true);

@@ -23,7 +23,7 @@ import control.Usuario;
 import control.UsuarioDAO;
 import net.miginfocom.swing.MigLayout;
 
-public class CadastroAssentos extends JFrame {
+public class CadastroAssentosC1 extends JFrame {
 
 	private JTextField textField;
 	private JTextField textField_1;
@@ -41,7 +41,7 @@ public class CadastroAssentos extends JFrame {
 	 */
 	
 
-	public CadastroAssentos(int row, int col) {
+	public CadastroAssentosC1(int row, int col) {
 		this.assento = row;
         this.assento1 = col;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,7 +58,7 @@ public class CadastroAssentos extends JFrame {
 		btnNewButton.setBackground(new Color(255, 255, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AssentosA1 jMain = new AssentosA1();
+				AssentosC1 jMain = new AssentosC1();
 				jMain.setVisible(true);
 				jMain.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				dispose();
@@ -111,10 +111,10 @@ public class CadastroAssentos extends JFrame {
 					usua.setNome(nome);
 					boolean a = usuarioDAO.inserir(usua, assento, assento1);
 					if (a) {
-						AssentosA1.assentosOcupados[assento][assento1] = true;
+						AssentosC1.assentosOcupados[assento][assento1] = true;
 						JOptionPane.showMessageDialog(null, "CPF cadastrado");
 					} else {
-						AssentosA1.assentosOcupados[assento][assento1] = false;
+						AssentosC1.assentosOcupados[assento][assento1] = false;
 						JOptionPane.showMessageDialog(null, "CPF já existente");
 					}
 				}
@@ -163,9 +163,10 @@ public class CadastroAssentos extends JFrame {
 						boolean a = usuarioDAO.remover(usua, assento, assento1);
 						if (a) {
 							JOptionPane.showMessageDialog(null, "Excluido com sucesso");
-							AssentosA1.assentosOcupados[assento][assento1] = false;
+							AssentosC1.assentosOcupados[assento][assento1] = false;
 						} else {
 							JOptionPane.showMessageDialog(null, "Erro, CPF ou/e Nome não encontrado!");
+							AssentosC1.assentosOcupados[assento][assento1] = false;
 						}
 					}
 				}
