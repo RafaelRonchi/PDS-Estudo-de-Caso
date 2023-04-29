@@ -3,7 +3,6 @@ package view;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import control.Funcionario;
-import control.FuncionarioDAO;
 import control.Usuario;
 import control.UsuarioDAO;
 import net.miginfocom.swing.MigLayout;
@@ -34,6 +32,9 @@ public class CadastroAssentos extends JFrame {
 	private JTextField txtNome;
 	private JTextField txtCpf;
 	private UsuarioDAO usuarioDAO = UsuarioDAO.getInstancia();
+	public static int assento = 0;
+	public static int assento1 = 0;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -51,10 +52,11 @@ public class CadastroAssentos extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
+	
+	 
 	public CadastroAssentos() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 974, 548);
 		contentPane = new JPanel();
@@ -62,7 +64,7 @@ public class CadastroAssentos extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[100.00px,grow 71][138.00px,grow][][138.00px,grow][16px,grow]", "[grow][53px][grow][41px][22.00px][45px][grow][36.00px][36.00][33.00px,grow][][grow]"));
+		contentPane.setLayout(new MigLayout("", "[100.00px,grow 71][138.00px,grow][][138.00px,grow][16px,grow]", "[grow][53px][grow][41px][22.00px][45px][grow][16.00px][26.00][103.00px,grow][grow]"));
 
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.setBackground(new Color(255, 255, 255));
@@ -109,28 +111,26 @@ public class CadastroAssentos extends JFrame {
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Usuario usua = new Usuario();
-				Long cpf = Long.parseLong(txtCpf.getText());
-				String nome = txtNome.getText();
-				
-				if (nome.isEmpty() || cpf == null ) {
-					JOptionPane.showMessageDialog(null, "Nome ou CPF nulos!");
-				} else {
-					usua.setCpf(cpf);
-					usua.setNome(nome);
-					boolean a = usuarioDAO.inserir(usua);
-					if (a) {
-						JOptionPane.showMessageDialog(null, "CPF cadastrado");
-					} else {
-						JOptionPane.showMessageDialog(null, "CPF já existente");
-					}
-				}
-				usua.setCpf(cpf);
-				usua.setNome(nome);
+				UsuarioDAO usuarioDAO = UsuarioDAO.getInstancia();
+		        Usuario usua = new Usuario();
+		        Long cpf = Long.parseLong(txtCpf.getText());
+		        String nome = txtNome.getText();
 
-				UsuarioDAO.inserir(usua);
-				txtCpf.setText(null);
-				txtNome.setText(null);
+		        if (nome.isEmpty() || cpf == null) {
+		            JOptionPane.showMessageDialog(null, "Nome ou CPF nulos!");
+		        } else {
+		            usua.setCpf(cpf);
+		            usua.setNome(nome);
+		            boolean a = usuarioDAO.inserir(usua, assento, assento1);
+		            if (a) {
+		                JOptionPane.showMessageDialog(null, "CPF cadastrado");
+		            } else {
+		                JOptionPane.showMessageDialog(null, "CPF já existente");
+		            }
+		        }
+
+		        txtCpf.setText(null);
+		        txtNome.setText(null);
 			}
 		});
 		contentPane.add(btnCadastrar, "cell 1 7,growx,aligny center");
@@ -144,54 +144,96 @@ public class CadastroAssentos extends JFrame {
 				btnExcluir.setBackground(Color.WHITE);
 				btnExcluir.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						UsuarioDAO usuarioDAO = UsuarioDAO.getInstancia();
+						String cpf = txtCpf.getText();
+						Usuario usua = new Usuario();
 						
+						usua.setCpf(Long.parseLong(cpf));
+						
+
+				        boolean removido = usuarioDAO.remover(usua, assento, assento1);
+				        if (removido) {
+				            JOptionPane.showMessageDialog(null, "CPF removido");
+				        } else {
+				            JOptionPane.showMessageDialog(null, "CPF não encontrado");
+				        }
 					}
 				});
+		
+		
+			JPanel panel = new JPanel();
+			panel.setVisible(true);
+		
 		
 				JButton btnAlterar = new JButton("Alterar");
 				btnAlterar.setVisible(true); 
 				btnAlterar.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
-				contentPane.add(btnAlterar, "cell 1 9 3 1,growx,aligny center");
+				contentPane.add(btnAlterar, "cell 0 8,growx,aligny center");
 				btnAlterar.setBackground(Color.WHITE);
-		btnAlterar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+				btnAlterar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
 
-				Usuario usua = new Usuario();
+						Usuario usua = new Usuario();
+						String cpf = txtCpf.getText();
+						if (cpf == null) {
+					        JOptionPane.showMessageDialog(null, "CPF nulo!");
+					    } else {
+					        usua.setCpf(Long.parseLong(cpf));
+					        boolean a = usuarioDAO.remover(usua, assento, assento1);
+					        if (a) {
+					            JOptionPane.showMessageDialog(null, "CPF removido!");
+					        } else {
+					            JOptionPane.showMessageDialog(null, "CPF não encontrado!");
+					        }
+					    }
 
-				// Long cpf = Long.parseLong(txtCpf.getText());
-
-				// Criação dos componentes do painel
-				JTextField campo1 = new JTextField();
-				JTextField campo2 = new JTextField();
-
-				JPanel painel = new JPanel(new GridLayout(0, 2)); // Criação do painel personalizado
-				painel.add(new JLabel("CPF:"));
-				painel.add(campo1);
-				painel.add(new JLabel("Novo nome:"));
-				painel.add(campo2);
-
-				int opcao = JOptionPane.showOptionDialog(null, painel, "Digite o CPF e um novo NOME",
-						JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
-
-				if (opcao == JOptionPane.OK_OPTION) {
-					String cpf = campo1.getText(); // Obtenção do valor do campo1
-					String nome = campo2.getText(); // Obtenção do valor do campo2
-
-					if (nome.isEmpty() || cpf.isEmpty()) {
-						JOptionPane.showMessageDialog(null, "Nome ou CPF nulos!");
-					} else {
-						usua.setCpf(Long.parseLong(cpf));
-						usua.setNome(nome);
-						boolean a = usuarioDAO.alterar(usua);
-						if (a) {
-							JOptionPane.showMessageDialog(null, "Nome alterado!");
-						} else {
-							JOptionPane.showMessageDialog(null, "Erro, CPF não encontrado!");
-						}
+					    txtCpf.setText(null);
+					    txtNome.setText(null);
+					
 					}
-				}
+				});
+	
+		panel.setBackground(new Color(255, 255, 255));
+		contentPane.add(panel, "cell 1 9 3 1,grow");
+		panel.setLayout(new MigLayout("", "[100px,grow][][100px,grow]", "[20px][grow]"));
+
+		JLabel cpfLabel = new JLabel("CPF");
+		panel.add(cpfLabel, "cell 0 0, width 50, alignx center, aligny center");
+
+		JSeparator separator = new JSeparator(SwingConstants.VERTICAL);
+		panel.add(separator, "cell 1 0,width 4,alignx center,growy");
+
+		JLabel nomeLabel = new JLabel("Nome");
+		panel.add(nomeLabel, "cell 2 0,width 50,alignx center,aligny center");
+		 table = new JTable();
+		table = new JTable();
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "CPF", "Nome" }));
+		panel.add(table, "cell 0 1 3 1,grow");
+	
+		JButton btnListar = new JButton("Listar Cadastros");
+		contentPane.add(btnListar, "cell 3 7,grow");
+		btnListar.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
+		btnListar.setBackground(Color.WHITE);
+		btnListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				DefaultTableModel model = (DefaultTableModel) table.getModel();
+				model.setRowCount(0); // limpa as linhas da tabela
+				
+
+				var retorno = UsuarioDAO.listarUsuarios(assento, assento1);
+				
+				
+				    
+				    Object[] row = { retorno.getCpf() ,retorno.getNome() };
+				    System.out.println(row);
+				    model.addRow(row);			  
+		
+				
 			}
 		});
+	
 	}
+
 
 }

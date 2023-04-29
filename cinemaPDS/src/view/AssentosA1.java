@@ -73,6 +73,7 @@ public class AssentosA1 extends JFrame {
 		lblAssentosA.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAssentosA.setForeground(Color.WHITE);
 		lblAssentosA.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 47));
+		
 		contentPane.add(lblAssentosA, "cell 0 1 14 1,grow");
 		
 		// Crie a matriz de botões
@@ -86,6 +87,19 @@ public class AssentosA1 extends JFrame {
 		                btn.setBackground(Color.WHITE);
 		                assentos[row][col] = btn;
 		                contentPane.add(btn, "cell " + (4 + col) + " " + (3 + row) + ",grow");
+		                
+		                CadastroAssentos selctSala = new CadastroAssentos();
+        				selctSala.assento = row;
+        				selctSala.assento1 = col;
+        				
+		                btn.addActionListener(new ActionListener() {
+		        			public void actionPerformed(ActionEvent e) {
+		        				dispose(); // fecha tela atual
+		        				selctSala.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		        				selctSala.setVisible(true);
+		        				
+		        			}
+		        		});
 		            }
 		        }
 		

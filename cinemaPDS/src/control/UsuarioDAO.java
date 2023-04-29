@@ -2,64 +2,54 @@ package control;
 
 import java.util.ArrayList;
 
-
 public class UsuarioDAO {
+    private static UsuarioDAO instancia;
+    private static Usuario[][] matrizUsuarios = new Usuario[10][10];
+    
 
-	private static ArrayList<Usuario> usuario = new ArrayList<>();
-	private static UsuarioDAO instancia;
+    private UsuarioDAO() {
+    }
 
-	public static ArrayList<Usuario> getUsuario() {
-		return usuario;
-	}
+    public static UsuarioDAO getInstancia() {
+        if (instancia == null) {
+            instancia = new UsuarioDAO();
+        }
+        return instancia;
+    }
 
-	public static void setUsuario(ArrayList<Usuario> usuario) {
-		UsuarioDAO.usuario = usuario;
-	}
+    public boolean inserir(Usuario u, Integer i, Integer j) {
+        if (matrizUsuarios[i][j] == null) {
+               matrizUsuarios[i][j] = u;
+              return true;
+                
+            
+        } else {
+        return false;
+    }
+    }
 
-	private UsuarioDAO() {
-	}
+    public boolean remover(Usuario usua, Integer i, Integer j) {
+                if (matrizUsuarios[i][j] != null && matrizUsuarios[i][j].getCpf().equals(usua.getCpf())) {
+                    matrizUsuarios[i][j] = null;
+                   return true;
+            
+        }
+        return false;
+    }
 
-	public ArrayList<Usuario> listarUsuario() {
-		return usuario;
-	}
+    public boolean alterar(Usuario novoUsuario, Integer i, Integer j) {
+       
+                if (matrizUsuarios[i][j] != null && matrizUsuarios[i][j].getCpf().equals(novoUsuario.getCpf())) {
+                    matrizUsuarios[i][j] = novoUsuario;
+                    return true;
+                
+            
+        }
+        return false;
+    }
 
-	public static UsuarioDAO getInstancia() {
-
-		if (instancia == null) {
-			instancia = new UsuarioDAO();
-			usuario = new ArrayList<>();
-		}
-
-		return instancia;
-	}
-
-	public static boolean inserir(Usuario u) {
-
-		for (int i = 0; i < usuario.size(); i++) {
-			Usuario antigoUsuario = usuario.get(i);
-			if (antigoUsuario.getCpf().equals(u.getCpf())) {
-				return false;
-			}
-		}
-		usuario.add(u);
-		return true;
-
-	}
-
-	public boolean remover(Usuario u) {
-		boolean removido = usuario.remove(u);
-		return removido;
-	}
-
-	public boolean alterar(Usuario novoUsuario) {
-		for (int i = 0; i < usuario.size(); i++) {
-			Usuario novoUsuario1 = usuario.get(i);
-			if (novoUsuario1.getCpf().equals(novoUsuario1.getCpf())) {
-				usuario.set(i, novoUsuario1);
-				return true;
-			}
-		}
-		return false;
-	}
-
+    public static Usuario listarUsuarios(Integer i, Integer j) {
+        return  matrizUsuarios[i][j];
+        
+    }
 }
