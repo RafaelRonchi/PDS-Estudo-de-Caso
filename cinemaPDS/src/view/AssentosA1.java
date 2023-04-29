@@ -79,29 +79,30 @@ public class AssentosA1 extends JFrame {
 		// Crie a matriz de botões
 				assentos = new JButton[5][6];
 
-		        // Adicione cada botão à matriz e configure-o com um ícone e cor de fundo
-		        for (int row = 0; row < 5; row++) {
-		            for (int col = 0; col < 6; col++) {
-		                JButton btn = new JButton("");
-		                btn.setIcon(new ImageIcon(AssentosA1.class.getResource("/Images/24868_redmensioned.jpeg")));
-		                btn.setBackground(Color.WHITE);
-		                assentos[row][col] = btn;
-		                contentPane.add(btn, "cell " + (4 + col) + " " + (3 + row) + ",grow");
-		                CadastroAssentos.assento = row;
-		                CadastroAssentos.assento1 = col;
-  
-        				
-		                btn.addActionListener(new ActionListener() {
-		        			public void actionPerformed(ActionEvent e) {
-		        				CadastroAssentos selctSala = new CadastroAssentos();
-		        				dispose(); // fecha tela atual
-		        				selctSala.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		        				selctSala.setVisible(true);
-		        				
-		        			}
-		        		});
-		            }
-		        }
+				for (int row = 0; row < 5; row++) {
+				    for (int col = 0; col < 6; col++) {
+				        final int finalRow = row;
+				        final int finalCol = col;
+				        JButton btn = new JButton("");
+				        btn.setIcon(new ImageIcon(AssentosA1.class.getResource("/Images/24868_redmensioned.jpeg")));
+				        btn.setBackground(Color.WHITE);
+				        assentos[row][col] = btn;
+				        contentPane.add(btn, "cell " + (4 + col) + " " + (3 + row) + ",grow");
+
+				        btn.addActionListener(new ActionListener() {
+				            public void actionPerformed(ActionEvent e) {
+				                CadastroAssentos selctSala = new CadastroAssentos();
+				                dispose();
+				                selctSala.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				                selctSala.setVisible(true);
+
+				                selctSala.assento = finalRow;
+				                selctSala.assento1 = finalCol;
+				            }
+				        });
+				    }
+				}
+
 		
 	}
 }

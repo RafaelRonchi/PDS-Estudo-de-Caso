@@ -29,7 +29,7 @@ public class UsuarioDAO {
     }
 
     public boolean remover(Usuario usua, Integer i, Integer j) {
-                if (matrizUsuarios[i][j] != null && matrizUsuarios[i][j].getCpf().equals(usua.getCpf())) {
+                if (matrizUsuarios[i][j] != null && matrizUsuarios[i][j].getCpf().equals(usua.getCpf()) && matrizUsuarios[i][j].getNome().equals(usua.getNome())) {
                     matrizUsuarios[i][j] = null;
                    return true;
             

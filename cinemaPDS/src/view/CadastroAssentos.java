@@ -70,10 +70,10 @@ public class CadastroAssentos extends JFrame {
 		btnNewButton.setBackground(new Color(255, 255, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose(); // fecha tela atual
 				AssentosA1 jMain = new AssentosA1();
 				jMain.setVisible(true);
 				jMain.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
 
 			}
 		});
@@ -147,7 +147,37 @@ public class CadastroAssentos extends JFrame {
 		btnExcluir.setBackground(Color.WHITE);
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Usuario usua = new Usuario();
+				// Criação dos componentes do painel
+				JTextField campo1 = new JTextField();
+				JTextField campo2 = new JTextField();
+
+				JPanel painel = new JPanel(new GridLayout(0, 2)); // Criação do painel personalizado
+				painel.add(new JLabel("CPF:"));
+				painel.add(campo1);
+				painel.add(new JLabel("Nome:"));
+				painel.add(campo2);
+
+				int opcao = JOptionPane.showOptionDialog(null, painel, "Digite o CPF e NOME para EXCLUSÃO!",
+						JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+
+				if (opcao == JOptionPane.OK_OPTION) {
+					String cpf = campo1.getText(); // Obtenção do valor do campo1
+					String nome = campo2.getText(); // Obtenção do valor do campo2
+
+					if (nome.isEmpty() || cpf.isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Nome ou CPF nulos!");
+					} else {
+						usua.setCpf(Long.parseLong(cpf));
+						usua.setNome(nome);
+						boolean a = usuarioDAO.remover(usua, assento, assento1);
+						if (a) {
+							JOptionPane.showMessageDialog(null, "Excluido com sucesso");
+						} else {
+							JOptionPane.showMessageDialog(null, "Erro, CPF ou/e Nome não encontrado!");
+						}
+					}
+				}
 			
 			
 			
@@ -170,7 +200,7 @@ public class CadastroAssentos extends JFrame {
 				var retorno = UsuarioDAO.listarUsuarios(assento, assento1);
 
 				Object[] row = { retorno.getCpf(), retorno.getNome() };
-				System.out.println(row);
+				
 				model.addRow(row);
 
 			}
