@@ -137,7 +137,7 @@ public class CadastroAssentos extends JFrame {
 		
 				JButton btnExcluir = new JButton("Excluir");
 				
-				btnExcluir.setVisible(false);
+				btnExcluir.setVisible(true);
 				
 				btnExcluir.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
 				contentPane.add(btnExcluir, "cell 3 7,growx,aligny center");
@@ -149,7 +149,7 @@ public class CadastroAssentos extends JFrame {
 				});
 		
 				JButton btnAlterar = new JButton("Alterar");
-				btnAlterar.setVisible(false); 
+				btnAlterar.setVisible(true); 
 				btnAlterar.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
 				contentPane.add(btnAlterar, "cell 1 9 3 1,growx,aligny center");
 				btnAlterar.setBackground(Color.WHITE);
