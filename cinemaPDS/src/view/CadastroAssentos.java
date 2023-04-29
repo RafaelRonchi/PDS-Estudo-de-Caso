@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,7 +19,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import control.Funcionario;
 import control.Usuario;
 import control.UsuarioDAO;
 import net.miginfocom.swing.MigLayout;
@@ -123,8 +121,10 @@ public class CadastroAssentos extends JFrame {
 					usua.setNome(nome);
 					boolean a = usuarioDAO.inserir(usua, assento, assento1);
 					if (a) {
+						AssentosA1.assentosOcupados[assento][assento1] = true;
 						JOptionPane.showMessageDialog(null, "CPF cadastrado");
 					} else {
+						AssentosA1.assentosOcupados[assento][assento1] = false;
 						JOptionPane.showMessageDialog(null, "CPF já existente");
 					}
 				}
@@ -178,9 +178,7 @@ public class CadastroAssentos extends JFrame {
 						}
 					}
 				}
-			
-			
-			
+
 			}
 		});
 
@@ -200,7 +198,7 @@ public class CadastroAssentos extends JFrame {
 				var retorno = UsuarioDAO.listarUsuarios(assento, assento1);
 
 				Object[] row = { retorno.getCpf(), retorno.getNome() };
-				
+
 				model.addRow(row);
 
 			}
