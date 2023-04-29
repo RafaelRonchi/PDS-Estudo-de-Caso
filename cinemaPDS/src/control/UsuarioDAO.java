@@ -40,10 +40,10 @@ public class UsuarioDAO {
     public boolean alterar(Usuario novoUsuario, Integer i, Integer j) {
        
                 if (matrizUsuarios[i][j] != null && matrizUsuarios[i][j].getCpf().equals(novoUsuario.getCpf())) {
-                    matrizUsuarios[i][j] = novoUsuario;
+                    matrizUsuarios[i][j].setNome(novoUsuario.getNome());
                     return true;
                 
-            
+ 
         }
         return false;
     }
