@@ -87,13 +87,13 @@ public class AssentosA1 extends JFrame {
 		                btn.setBackground(Color.WHITE);
 		                assentos[row][col] = btn;
 		                contentPane.add(btn, "cell " + (4 + col) + " " + (3 + row) + ",grow");
-		                
-		                CadastroAssentos selctSala = new CadastroAssentos();
-        				selctSala.assento = row;
-        				selctSala.assento1 = col;
+		                CadastroAssentos.assento = row;
+		                CadastroAssentos.assento1 = col;
+  
         				
 		                btn.addActionListener(new ActionListener() {
 		        			public void actionPerformed(ActionEvent e) {
+		        				CadastroAssentos selctSala = new CadastroAssentos();
 		        				dispose(); // fecha tela atual
 		        				selctSala.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		        				selctSala.setVisible(true);

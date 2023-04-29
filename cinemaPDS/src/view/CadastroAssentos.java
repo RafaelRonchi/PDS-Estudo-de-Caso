@@ -32,8 +32,8 @@ public class CadastroAssentos extends JFrame {
 	private JTextField txtNome;
 	private JTextField txtCpf;
 	private UsuarioDAO usuarioDAO = UsuarioDAO.getInstancia();
-	public static int assento = 0;
-	public static int assento1 = 0;
+	public static int assento;
+	public static int assento1;
 	private JTable table;
 
 	/**
@@ -71,7 +71,7 @@ public class CadastroAssentos extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose(); // fecha tela atual
-				JFrameMain jMain = new JFrameMain();
+				AssentosA1 jMain = new AssentosA1();
 				jMain.setVisible(true);
 				jMain.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
@@ -220,6 +220,8 @@ public class CadastroAssentos extends JFrame {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				model.setRowCount(0); // limpa as linhas da tabela
 				
+				System.out.println(assento);
+				System.out.println(assento1);
 
 				var retorno = UsuarioDAO.listarUsuarios(assento, assento1);
 				

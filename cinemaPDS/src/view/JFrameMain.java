@@ -105,18 +105,6 @@ public class JFrameMain extends JFrame {
 						btnLogin.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								
-								Object[] opcoes = {"Cadastrar", "Alterar"};
-								int escolha = JOptionPane.showOptionDialog(null, "Escolha uma opção:", "Cadastro ou Alteração", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
-
-								if (escolha == JOptionPane.YES_OPTION) {
-								    // Cadastrar
-								    // Faça algo aqui quando o botão "Cadastrar" for clicado
-								} else if (escolha == JOptionPane.NO_OPTION) {
-								    // Alterar
-								    // Faça algo aqui quando o botão "Alterar" for clicado
-								} else {
-								    // O usuário fechou a caixa de diálogo sem fazer uma escolha
-								}
 								ArrayList<Funcionario> lista = funcionarioDAO.listarFuncionario();
 								String user = txtUsuario.getText();
 								Long cpf = Long.parseLong(txtSenha.getText());
