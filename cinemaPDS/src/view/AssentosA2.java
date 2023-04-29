@@ -20,6 +20,8 @@ public class AssentosA2 extends JFrame {
 
 	private JPanel contentPane;
 	private JButton[][] assentos;
+	public static boolean cor;
+	public static boolean[][] assentosOcupados = new boolean[5][6];
 
 	/**
 	 * Launch the application.
@@ -42,19 +44,21 @@ public class AssentosA2 extends JFrame {
 	 * Create the frame.
 	 */
 	public AssentosA2() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(AssentosA1.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
+		setIconImage(Toolkit.getDefaultToolkit()
+				.getImage(AssentosA1.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
 		setBackground(Color.WHITE);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 860, 500);
-		
 
 		contentPane = new JPanel();
-	    contentPane.setBackground(new Color(0, 0, 64));
-	    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-	    setContentPane(contentPane);
-	    contentPane.setLayout(new MigLayout("", "[47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow]", "[49px,grow][49px,grow][49px,grow][49px,grow][49px,grow][49px,grow][49px,grow][49px,grow][49px,grow]"));
-		
+		contentPane.setBackground(new Color(0, 0, 64));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new MigLayout("",
+				"[47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow]",
+				"[49px,grow][49px,grow][49px,grow][49px,grow][49px,grow][49px,grow][49px,grow][49px,grow][49px,grow]"));
+
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -64,30 +68,45 @@ public class AssentosA2 extends JFrame {
 				selctSala.setVisible(true);
 			}
 		});
-		
+
 		btnNewButton.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 12));
 		btnNewButton.setBackground(Color.WHITE);
 		contentPane.add(btnNewButton, "cell 0 0,alignx left,aligny top");
-		
+
 		JLabel lblAssentosA = new JLabel("Assentos A2");
 		lblAssentosA.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAssentosA.setForeground(Color.WHITE);
 		lblAssentosA.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 47));
 		contentPane.add(lblAssentosA, "cell 0 1 14 1,grow");
-		
-		// Crie a matriz de botões
-				assentos = new JButton[5][6];
 
-		        // Adicione cada botão à matriz e configure-o com um ícone e cor de fundo
-		        for (int row = 0; row < 5; row++) {
-		            for (int col = 0; col < 6; col++) {
-		                JButton btn = new JButton("");
-		                btn.setIcon(new ImageIcon(AssentosA1.class.getResource("/Images/24868_redmensioned.jpeg")));
-		                btn.setBackground(Color.WHITE);
-		                assentos[row][col] = btn;
-		                contentPane.add(btn, "cell " + (4 + col) + " " + (3 + row) + ",grow");
-		            }
-		        }
-		
+		// Crie a matriz de botões
+		assentos = new JButton[5][6];
+
+		for (int row = 0; row < 5; row++) {
+			for (int col = 0; col < 6; col++) {
+				final int finalRow = row;
+				final int finalCol = col;
+
+				JButton btn = new JButton("");
+				btn.setIcon(new ImageIcon(AssentosA1.class.getResource("/Images/24868_redmensioned.jpeg")));
+				btn.setBackground(assentosOcupados[row][col] ? Color.RED : Color.WHITE);
+				assentos[row][col] = btn;
+				contentPane.add(btn, "cell " + (4 + col) + " " + (3 + row) + ",grow");
+
+				btn.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						CadastroAssentosA2 selctSala = new CadastroAssentosA2(finalRow, finalCol);
+						dispose();
+						selctSala.setExtendedState(JFrame.MAXIMIZED_BOTH);
+						selctSala.setVisible(true);
+
+						selctSala.assento = finalRow;
+						selctSala.assento1 = finalCol;
+					}
+				});
+			}
+
+		}
+
 	}
 }

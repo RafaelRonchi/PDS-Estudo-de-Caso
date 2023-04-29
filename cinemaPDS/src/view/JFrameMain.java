@@ -104,6 +104,7 @@ public class JFrameMain extends JFrame {
 						btnLogin.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 11));
 						btnLogin.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
+								
 								ArrayList<Funcionario> lista = funcionarioDAO.listarFuncionario();
 								String user = txtUsuario.getText();
 								Long cpf = Long.parseLong(txtSenha.getText());

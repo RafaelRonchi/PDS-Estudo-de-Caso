@@ -3,15 +3,10 @@ package control;
 import java.time.LocalDate;
 
 public class Funcionario {
-
-	
-	
-	
-	
-	
 	private Long cpf;
 	private String nome;
 	private LocalDate dataNasc;
+	
 	public Long getCpf() {
 		return cpf;
 	}

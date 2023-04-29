@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,50 +16,34 @@ import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import control.Funcionario;
-import control.FuncionarioDAO;
+import control.Usuario;
+import control.UsuarioDAO;
 import net.miginfocom.swing.MigLayout;
 
-public class CadastrarFuncionario extends JFrame {
+public class CadastroAssentosC1 extends JFrame {
 
+	private JTextField textField;
+	private JTextField textField_1;
 	private JPanel contentPane;
 	private JTextField txtNome;
 	private JTextField txtCpf;
+	private UsuarioDAO usuarioDAO = UsuarioDAO.getInstancia();
+	public static int assento;
+	public static int assento1;
 	private JTable table;
-	private FuncionarioDAO funcionarioDAO = FuncionarioDAO.getInstancia();
+	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-		            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-		                | UnsupportedLookAndFeelException e) {
-		            // LAF Windows não encontrado, usar o LAF padrão do sistema
-		        }
-				try {
-					CadastrarFuncionario frame = new CadastrarFuncionario();
-					frame.setVisible(true);
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
-	/**
-	 * Create the frame.
-	 */
-	public CadastrarFuncionario() {
+	public CadastroAssentosC1(int row, int col) {
+		this.assento = row;
+        this.assento1 = col;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 974, 548);
 		contentPane = new JPanel();
@@ -69,16 +52,16 @@ public class CadastrarFuncionario extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[100.00px,grow 71][138.00px,grow][][138.00px,grow][16px,grow]",
-				"[grow][53px][grow][41px][22.00px][45px][grow][23px][36.00][130.00px,grow][][grow]"));
+				"[grow][53px][grow][41px][22.00px][45px][grow][16.00px][9.00][16.00][90.00px,grow][6][grow]"));
 
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.setBackground(new Color(255, 255, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose(); // fecha tela atual
-				JFrameMain jMain = new JFrameMain();
+				AssentosC1 jMain = new AssentosC1();
 				jMain.setVisible(true);
 				jMain.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				dispose();
 
 			}
 		});
@@ -104,7 +87,7 @@ public class CadastrarFuncionario extends JFrame {
 		contentPane.add(txtCpf, "cell 3 5,growx,aligny center");
 		txtCpf.setColumns(10);
 
-		JLabel lblNewLabel_2 = new JLabel("Cadastrar Funcionario");
+		JLabel lblNewLabel_2 = new JLabel("Assento");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 66));
@@ -115,39 +98,106 @@ public class CadastrarFuncionario extends JFrame {
 		btnCadastrar.setBackground(Color.WHITE);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				Funcionario funcio = new Funcionario();
+
+				UsuarioDAO usuarioDAO = UsuarioDAO.getInstancia();
+				Usuario usua = new Usuario();
 				Long cpf = Long.parseLong(txtCpf.getText());
 				String nome = txtNome.getText();
-				
-				if (nome.isEmpty() || cpf == null ) {
+
+				if (nome.isEmpty() || cpf == null) {
 					JOptionPane.showMessageDialog(null, "Nome ou CPF nulos!");
 				} else {
-					funcio.setCpf(cpf);
-					funcio.setNome(nome);
-					boolean a = funcionarioDAO.inserir(funcio);
+					usua.setCpf(cpf);
+					usua.setNome(nome);
+					boolean a = usuarioDAO.inserir(usua, assento, assento1);
 					if (a) {
+						AssentosC1.assentosOcupados[assento][assento1] = true;
 						JOptionPane.showMessageDialog(null, "CPF cadastrado");
 					} else {
+						AssentosC1.assentosOcupados[assento][assento1] = false;
 						JOptionPane.showMessageDialog(null, "CPF já existente");
 					}
 				}
-				
-				funcio.setCpf(cpf);
-				funcio.setNome(nome);
 
-				funcionarioDAO.inserir(funcio);
 				txtCpf.setText(null);
 				txtNome.setText(null);
 			}
 		});
-		contentPane.add(btnCadastrar, "cell 1 7,grow");
+		contentPane.add(btnCadastrar, "cell 1 7,growx,aligny center");
 
 		JPanel panel = new JPanel();
-		panel.setVisible(false);
-	
+		panel.setVisible(true);
+
+		JButton btnExcluir = new JButton("Excluir");
+
+		btnExcluir.setVisible(true);
+
+		btnExcluir.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
+		contentPane.add(btnExcluir, "cell 3 7,growx,aligny center");
+		btnExcluir.setBackground(Color.WHITE);
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Usuario usua = new Usuario();
+				// Criação dos componentes do painel
+				JTextField campo1 = new JTextField();
+				JTextField campo2 = new JTextField();
+
+				JPanel painel = new JPanel(new GridLayout(0, 2)); // Criação do painel personalizado
+				painel.add(new JLabel("CPF:"));
+				painel.add(campo1);
+				painel.add(new JLabel("Nome:"));
+				painel.add(campo2);
+
+				int opcao = JOptionPane.showOptionDialog(null, painel, "Digite o CPF e NOME para EXCLUSÃO!",
+						JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+
+				if (opcao == JOptionPane.OK_OPTION) {
+					String cpf = campo1.getText(); // Obtenção do valor do campo1
+					String nome = campo2.getText(); // Obtenção do valor do campo2
+
+					if (nome.isEmpty() || cpf.isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Nome ou CPF nulos!");
+					} else {
+						usua.setCpf(Long.parseLong(cpf));
+						usua.setNome(nome);
+						boolean a = usuarioDAO.remover(usua, assento, assento1);
+						if (a) {
+							JOptionPane.showMessageDialog(null, "Excluido com sucesso");
+							AssentosC1.assentosOcupados[assento][assento1] = false;
+						} else {
+							JOptionPane.showMessageDialog(null, "Erro, CPF ou/e Nome não encontrado!");
+							AssentosC1.assentosOcupados[assento][assento1] = false;
+						}
+					}
+				}
+
+			}
+		});
+
+		JButton btnListar = new JButton("Listar Cadastros");
+		contentPane.add(btnListar, "cell 1 9 3 1,grow");
+		btnListar.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
+		btnListar.setBackground(Color.WHITE);
+		btnListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				DefaultTableModel model = (DefaultTableModel) table.getModel();
+				model.setRowCount(0); // limpa as linhas da tabela
+
+				System.out.println(assento);
+				System.out.println(assento1);
+
+				var retorno = UsuarioDAO.listarUsuarios(assento, assento1);
+
+				Object[] row = { retorno.getCpf(), retorno.getNome() };
+
+				model.addRow(row);
+
+			}
+		});
+
 		panel.setBackground(new Color(255, 255, 255));
-		contentPane.add(panel, "cell 1 9 3 1,grow");
+		contentPane.add(panel, "cell 1 10 3 1,grow");
 		panel.setLayout(new MigLayout("", "[100px,grow][][100px,grow]", "[20px][grow]"));
 
 		JLabel cpfLabel = new JLabel("CPF");
@@ -158,41 +208,19 @@ public class CadastrarFuncionario extends JFrame {
 
 		JLabel nomeLabel = new JLabel("Nome");
 		panel.add(nomeLabel, "cell 2 0,width 50,alignx center,aligny center");
-
+		table = new JTable();
 		table = new JTable();
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "CPF", "Nome" }));
 		panel.add(table, "cell 0 1 3 1,grow");
 
-		JButton btnExcluir = new JButton("Excluir");
-		
-		btnExcluir.setVisible(false);
-		
-		btnExcluir.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
-		contentPane.add(btnExcluir, "cell 1 11,growx,aligny center");
-		btnExcluir.setBackground(Color.WHITE);
-		btnExcluir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Funcionario funcio = new Funcionario();
-				int selectedRow = table.getSelectedRow(); // pega a linha selecionada na tabela
-				if (selectedRow != -1) { // se alguma linha foi selecionada
-					funcionarioDAO.remover(funcio);
-					((DefaultTableModel) table.getModel()).removeRow(selectedRow); // remove a linha da tabela
-				}
-			}
-		});
-
 		JButton btnAlterar = new JButton("Alterar");
-		btnAlterar.setVisible(false); 
+		btnAlterar.setVisible(true);
 		btnAlterar.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
-		contentPane.add(btnAlterar, "cell 3 11,growx,aligny center");
+		contentPane.add(btnAlterar, "cell 1 12 3 1,growx,aligny center");
 		btnAlterar.setBackground(Color.WHITE);
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				Funcionario usua = new Funcionario();
-
-				// Long cpf = Long.parseLong(txtCpf.getText());
-
+				Usuario usua = new Usuario();
 				// Criação dos componentes do painel
 				JTextField campo1 = new JTextField();
 				JTextField campo2 = new JTextField();
@@ -215,7 +243,7 @@ public class CadastrarFuncionario extends JFrame {
 					} else {
 						usua.setCpf(Long.parseLong(cpf));
 						usua.setNome(nome);
-						boolean a = funcionarioDAO.alterar(usua);
+						boolean a = usuarioDAO.alterar(usua, assento, assento1);
 						if (a) {
 							JOptionPane.showMessageDialog(null, "Nome alterado!");
 						} else {
@@ -223,30 +251,10 @@ public class CadastrarFuncionario extends JFrame {
 						}
 					}
 				}
+
 			}
 		});
-		JButton btnListar = new JButton("Listar Cadastros");
-		contentPane.add(btnListar, "cell 3 7,grow");
-		btnListar.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
-		btnListar.setBackground(Color.WHITE);
-		btnListar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ArrayList<Funcionario> lista = funcionarioDAO.listarFuncionario();
-				
-				DefaultTableModel model = (DefaultTableModel) table.getModel();
-				model.setRowCount(0); // limpa as linhas da tabela
-				
-				for (Funcionario funcionario : lista) {
-					Object[] row = { funcionario.getCpf(), funcionario.getNome() };
-					model.addRow(row);
-				}
-				
-				panel.setVisible(true);
-				btnExcluir.setVisible(true);
-				btnAlterar.setVisible(true); 
-				
-				
-			}
-		});
+
 	}
+
 }

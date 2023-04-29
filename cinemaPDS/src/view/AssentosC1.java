@@ -20,6 +20,8 @@ public class AssentosC1 extends JFrame {
 
 	private JPanel contentPane;
 	private JButton[][] assentos;
+	public static boolean cor;
+	public static boolean[][] assentosOcupados = new boolean[5][6];
 
 	/**
 	 * Launch the application.
@@ -28,7 +30,7 @@ public class AssentosC1 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AssentosA1 frame = new AssentosA1();
+					AssentosC1 frame = new AssentosC1();
 					frame.setVisible(true);
 					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				} catch (Exception e) {
@@ -59,7 +61,7 @@ public class AssentosC1 extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose(); // fecha tela atual
-				SelecionarSala1 selctSala = new SelecionarSala1();
+				SelecionarSala3 selctSala = new SelecionarSala3();
 				selctSala.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				selctSala.setVisible(true);
 			}
@@ -74,20 +76,34 @@ public class AssentosC1 extends JFrame {
 		lblAssentosA.setForeground(Color.WHITE);
 		lblAssentosA.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 47));
 		contentPane.add(lblAssentosA, "cell 0 1 14 1,grow");
-		
 		// Crie a matriz de botões
-				assentos = new JButton[5][6];
+		assentos = new JButton[5][6];
 
-		        // Adicione cada botão à matriz e configure-o com um ícone e cor de fundo
-		        for (int row = 0; row < 5; row++) {
-		            for (int col = 0; col < 6; col++) {
-		                JButton btn = new JButton("");
-		                btn.setIcon(new ImageIcon(AssentosA1.class.getResource("/Images/24868_redmensioned.jpeg")));
-		                btn.setBackground(Color.WHITE);
-		                assentos[row][col] = btn;
-		                contentPane.add(btn, "cell " + (4 + col) + " " + (3 + row) + ",grow");
-		            }
-		        }
+		for (int row = 0; row < 5; row++) {
+			for (int col = 0; col < 6; col++) {
+				final int finalRow = row;
+				final int finalCol = col;
+
+				JButton btn = new JButton("");
+				btn.setIcon(new ImageIcon(AssentosA1.class.getResource("/Images/24868_redmensioned.jpeg")));
+				btn.setBackground(assentosOcupados[row][col] ? Color.RED : Color.WHITE);
+				assentos[row][col] = btn;
+				contentPane.add(btn, "cell " + (4 + col) + " " + (3 + row) + ",grow");
+
+				btn.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						CadastroAssentosC1 selctSala = new CadastroAssentosC1(finalRow, finalCol);
+						dispose();
+						selctSala.setExtendedState(JFrame.MAXIMIZED_BOTH);
+						selctSala.setVisible(true);
+
+						selctSala.assento = finalRow;
+						selctSala.assento1 = finalCol;
+					}
+				});
+			}
+
+		}
 		
 	}
 }
