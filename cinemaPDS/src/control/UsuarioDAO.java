@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class UsuarioDAO {
     private static UsuarioDAO instancia;
     private static Usuario[][] matrizUsuarios = new Usuario[10][10];
+	private String sala;
+	private String sessao;
     
 
     private UsuarioDAO() {
@@ -17,8 +19,10 @@ public class UsuarioDAO {
         return instancia;
     }
 
-    public boolean inserir(Usuario u, Integer i, Integer j) {
-        if (matrizUsuarios[i][j] == null) {
+    public boolean inserir(String sessao,String sala,Usuario u, Integer i, Integer j) {
+        this.sala = sala;
+        this.sessao = sessao;
+    	if (matrizUsuarios[i][j] == null) {
                matrizUsuarios[i][j] = u;
               return true;
                 
@@ -26,6 +30,7 @@ public class UsuarioDAO {
         } else {
         return false;
     }
+        
     }
 
     public boolean remover(Usuario usua, Integer i, Integer j) {

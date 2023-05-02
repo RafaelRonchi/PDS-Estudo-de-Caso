@@ -19,10 +19,13 @@ import net.miginfocom.swing.MigLayout;
 public class SelecionarFilme extends JFrame {
 
 	private JPanel contentPane;
+	private String filme;
 
 	/**
 	 * Launch the application.
 	 */
+	
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -41,6 +44,7 @@ public class SelecionarFilme extends JFrame {
 	 * Create the frame.
 	 */
 	public SelecionarFilme() {
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(SelecionarFilme.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,7 +59,7 @@ public class SelecionarFilme extends JFrame {
 		btnFilme1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose(); // fecha tela atual
-				SelecionarSala1 sl1 = new SelecionarSala1();
+				SelecionarSala1 sl1 = new SelecionarSala1("A");
 				sl1.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				sl1.setVisible(true);
 			}
@@ -82,7 +86,7 @@ public class SelecionarFilme extends JFrame {
 		btnFilme1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose(); // fecha tela atual
-				SelecionarSala2 sl2 = new SelecionarSala2();
+				SelecionarSala1 sl2 = new SelecionarSala1("B");
 				sl2.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				sl2.setVisible(true);
 			}
@@ -95,7 +99,7 @@ public class SelecionarFilme extends JFrame {
 		btnFilme1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose(); // fecha tela atual
-				SelecionarSala3 sl3 = new SelecionarSala3();
+				SelecionarSala1 sl3 = new SelecionarSala1("C");
 				sl3.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				sl3.setVisible(true);
 			}

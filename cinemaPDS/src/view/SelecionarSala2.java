@@ -71,7 +71,7 @@ public class SelecionarSala2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 		
 				dispose(); // fecha tela atual
-				AssentosB1 b1  = new AssentosB1 ();
+				Assentos b1  = new Assentos();
 
 				b1.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				b1.setVisible(true);
@@ -103,7 +103,7 @@ public class SelecionarSala2 extends JFrame {
 		BtnSalaB2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose(); // fecha tela atual
-				AssentosB2 b2  = new AssentosB2 ();
+				Assentos b2  = new Assentos ();
 
 				b2.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				b2.setVisible(true);

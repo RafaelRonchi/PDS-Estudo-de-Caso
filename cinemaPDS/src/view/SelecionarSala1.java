@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 import java.security.interfaces.DSAKey;
 import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
-import java.awt.GridLayout;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.SwingConstants;
 
@@ -26,6 +25,7 @@ public class SelecionarSala1 extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	public SelecionarSala1() {}
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -43,7 +43,7 @@ public class SelecionarSala1 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SelecionarSala1() {
+	public SelecionarSala1(String sessao) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(SelecionarSala1.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -81,7 +81,7 @@ public class SelecionarSala1 extends JFrame {
 public void actionPerformed(ActionEvent e) {
 				
 				dispose(); // fecha tela atual
-				AssentosA1 a1  = new AssentosA1 ();
+				Assentos a1  = new Assentos ("1", sessao);
 
 				a1.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				a1.setVisible(true);
@@ -111,7 +111,7 @@ public void actionPerformed(ActionEvent e) {
 				
 			
 						dispose(); // fecha tela atual
-						AssentosA2 a2  = new AssentosA2 ();
+						Assentos a2  = new Assentos ("2", sessao);
 
 						a2.setExtendedState(JFrame.MAXIMIZED_BOTH);
 						a2.setVisible(true);

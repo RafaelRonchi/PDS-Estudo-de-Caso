@@ -16,21 +16,25 @@ import javax.swing.ImageIcon;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.SwingConstants;
 
-public class AssentosA2 extends JFrame {
+public class Assentos extends JFrame {
 
 	private JPanel contentPane;
+	private String sala;
 	private JButton[][] assentos;
-	public static boolean cor;
-	public static boolean[][] assentosOcupados = new boolean[5][6];
+	public  boolean cor;
+	private boolean[][] assentosOcupados = new boolean[5][6];
+	private String sessao;
+
 
 	/**
 	 * Launch the application.
 	 */
+	public Assentos() {}
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AssentosA2 frame = new AssentosA2();
+					Assentos frame = new Assentos();
 					frame.setVisible(true);
 					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				} catch (Exception e) {
@@ -43,9 +47,10 @@ public class AssentosA2 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AssentosA2() {
+	public Assentos(String sessao,String sala) {
+		this.sala = sala;
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(AssentosA1.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
+				.getImage(Assentos.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
 		setBackground(Color.WHITE);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,27 +64,28 @@ public class AssentosA2 extends JFrame {
 				"[47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow][47px,grow]",
 				"[49px,grow][49px,grow][49px,grow][49px,grow][49px,grow][49px,grow][49px,grow][49px,grow][49px,grow]"));
 
-		JButton btnNewButton = new JButton("Voltar");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose(); // fecha tela atual
-				SelecionarSala1 selctSala = new SelecionarSala1();
+				SelecionarSala1 selctSala = new SelecionarSala1(sala);
 				selctSala.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				selctSala.setVisible(true);
 			}
 		});
 
-		btnNewButton.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 12));
-		btnNewButton.setBackground(Color.WHITE);
-		contentPane.add(btnNewButton, "cell 0 0,alignx left,aligny top");
+		btnVoltar.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 12));
+		btnVoltar.setBackground(Color.WHITE);
+		contentPane.add(btnVoltar, "cell 0 0,alignx left,aligny top");
 
-		JLabel lblAssentosA = new JLabel("Assentos A2");
+		JLabel lblAssentosA = new JLabel("Assentos A1");
 		lblAssentosA.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAssentosA.setForeground(Color.WHITE);
 		lblAssentosA.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 47));
+
 		contentPane.add(lblAssentosA, "cell 0 1 14 1,grow");
 
-		// Crie a matriz de botões
+		// Cria a matriz de botões
 		assentos = new JButton[5][6];
 
 		for (int row = 0; row < 5; row++) {
@@ -88,14 +94,14 @@ public class AssentosA2 extends JFrame {
 				final int finalCol = col;
 
 				JButton btn = new JButton("");
-				btn.setIcon(new ImageIcon(AssentosA1.class.getResource("/Images/24868_redmensioned.jpeg")));
-				btn.setBackground(assentosOcupados[row][col] ? Color.RED : Color.WHITE);
+				btn.setIcon(new ImageIcon(Assentos.class.getResource("/Images/24868_redmensioned.jpeg")));
+				btn.setBackground(assentosOcupados(sessao,sala)[row][col] ? Color.RED : Color.WHITE);
 				assentos[row][col] = btn;
 				contentPane.add(btn, "cell " + (4 + col) + " " + (3 + row) + ",grow");
-
+				
 				btn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						CadastroAssentosA2 selctSala = new CadastroAssentosA2(finalRow, finalCol);
+						CadastroAssentos selctSala = new CadastroAssentos( sessao, sala, finalRow, finalCol);
 						dispose();
 						selctSala.setExtendedState(JFrame.MAXIMIZED_BOTH);
 						selctSala.setVisible(true);
@@ -105,8 +111,39 @@ public class AssentosA2 extends JFrame {
 					}
 				});
 			}
-
+			
 		}
+		
+		
+		
+		
 
 	}
+	private boolean[][] assentosOcupados(String sessao, String sala2) {
+		
+		
+		return null;
+	}
+	public JButton[][] getAssentos() {
+		return assentos;
+	}
+	public void setAssentos(JButton[][] assentos) {
+		this.assentos = assentos;
+		
+		
+		
+	}
+	public boolean[][] getAssentosOcupados() {
+		return assentosOcupados;
+	}
+	public void setAssentosOcupados(String sessao,String sala,boolean[][] assentosOcupados) throws NullPointerException{
+		this.sessao = sessao;
+		this.sala = sala;
+		this.assentosOcupados = assentosOcupados;
+		
+	}
+
+
+
 }
+
