@@ -95,19 +95,23 @@ public class Assentos extends JFrame {
 
 				JButton btn = new JButton("");
 				btn.setIcon(new ImageIcon(Assentos.class.getResource("/Images/24868_redmensioned.jpeg")));
-				btn.setBackground(assentosOcupados(sessao,sala)[row][col] ? Color.RED : Color.WHITE);
+				btn.setBackground(assentosOcupados(sessao,sala,row,col) ? Color.RED : Color.WHITE);
 				assentos[row][col] = btn;
 				contentPane.add(btn, "cell " + (4 + col) + " " + (3 + row) + ",grow");
 				
-				btn.addActionListener(new ActionListener() {
+				btn.addActionListener( new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						
 						CadastroAssentos selctSala = new CadastroAssentos( sessao, sala, finalRow, finalCol);
 						dispose();
 						selctSala.setExtendedState(JFrame.MAXIMIZED_BOTH);
 						selctSala.setVisible(true);
 
-						selctSala.assento = finalRow;
-						selctSala.assento1 = finalCol;
+						CadastroAssentos.assento = finalRow;
+						CadastroAssentos.assento1 = finalCol;
+						assentosOcupados[finalRow][finalCol]=false;
+				
+					
 					}
 				});
 			}
@@ -119,10 +123,11 @@ public class Assentos extends JFrame {
 		
 
 	}
-	private boolean[][] assentosOcupados(String sessao, String sala2) {
-		
-		
-		return null;
+	private boolean assentosOcupados(String sessao, String sala, int row, int column ) {
+			this.sessao = sessao;
+			this.sala=sala;
+			
+		return !assentosOcupados[row][column] ;
 	}
 	public JButton[][] getAssentos() {
 		return assentos;
@@ -136,9 +141,8 @@ public class Assentos extends JFrame {
 	public boolean[][] getAssentosOcupados() {
 		return assentosOcupados;
 	}
-	public void setAssentosOcupados(String sessao,String sala,boolean[][] assentosOcupados) throws NullPointerException{
-		this.sessao = sessao;
-		this.sala = sala;
+	public void setAssentosOcupados(boolean[][] assentosOcupados) {
+	
 		this.assentosOcupados = assentosOcupados;
 		
 	}
