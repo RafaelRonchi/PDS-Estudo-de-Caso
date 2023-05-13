@@ -173,10 +173,39 @@ public class CadastrarFuncionario extends JFrame {
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Funcionario funcio = new Funcionario();
-				int selectedRow = table.getSelectedRow(); // pega a linha selecionada na tabela
-				if (selectedRow != -1) { // se alguma linha foi selecionada
-					funcionarioDAO.remover(funcio);
-					((DefaultTableModel) table.getModel()).removeRow(selectedRow); // remove a linha da tabela
+			
+					
+					// Criação dos componentes do painel
+					JTextField campo1 = new JTextField();
+					JTextField campo2 = new JTextField();
+
+					JPanel painel = new JPanel(new GridLayout(0, 2)); // Criação do painel personalizado
+					painel.add(new JLabel("CPF:"));
+					painel.add(campo1);
+					painel.add(new JLabel("Nome:"));
+					painel.add(campo2);
+
+					int opcao = JOptionPane.showOptionDialog(null, painel, "Digite o CPF e NOME para EXCLUSÃO!",
+							JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+
+					if (opcao == JOptionPane.OK_OPTION) {
+						String cpf = campo1.getText(); // Obtenção do valor do campo1
+						String nome = campo2.getText(); // Obtenção do valor do campo2
+
+						if (nome.isEmpty() || cpf.isEmpty()) {
+							JOptionPane.showMessageDialog(null, "Nome ou CPF nulos!");
+						} else {
+							funcio.setCpf(Long.parseLong(cpf));
+							funcio.setNome(nome);
+							boolean a = funcionarioDAO.remover(funcio);
+							if (a) {
+								JOptionPane.showMessageDialog(null, "Excluido com sucesso");
+							
+							} else {
+								JOptionPane.showMessageDialog(null, "Erro, CPF ou/e Nome não encontrado!");
+							}
+						
+					}
 				}
 			}
 		});
