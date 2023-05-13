@@ -34,21 +34,28 @@ public class FuncionarioDAO {
 
 	public boolean inserir(Funcionario p) {
 
-		for (int i = 0; i < funcionario.size(); i++) {
-			Funcionario antigoFuncionario = funcionario.get(i);
-			if (antigoFuncionario.getCpf().equals(p.getCpf())) {
+		for (Funcionario funcionario2 : funcionario) {
+			if(funcionario2.getCpf().equals(p.getCpf())) {
 				return false;
 			}
 		}
+			
+		
 		funcionario.add(p);
 		return true;
 
 	}
 
 	public boolean remover(Funcionario f) {
-		boolean removido = funcionario.remove(f);
-		return removido;
+	    for (Funcionario funcionario2 : funcionario) {
+	        if (f.getCpf().equals(funcionario2.getCpf()) && f.getNome().equals(funcionario2.getNome())) {
+	            funcionario.remove(funcionario2);
+	            return true;
+	        }
+	    }
+	    return false;
 	}
+
 
 	public boolean alterar(Funcionario novoFuncionario) {
 		for (int i = 0; i < funcionario.size(); i++) {
