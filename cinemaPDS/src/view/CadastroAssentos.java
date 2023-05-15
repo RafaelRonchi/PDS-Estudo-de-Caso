@@ -34,6 +34,7 @@ public class CadastroAssentos extends JFrame {
 	public static int assento;
 	public static int assento1;
 	private JTable table;
+	public Integer salaN = 1;
 	
 
 	/**
@@ -127,13 +128,13 @@ public class CadastroAssentos extends JFrame {
 					} else {
 						usua.setMeiaEntrada(false);
 					}
-					boolean a = usuarioDAO.inserir(usua, assento, assento1);
+					boolean a = usuarioDAO.inserir(usua, assento, assento1, salaN);
 					if (a) {
 						AssentosA1.assentosOcupados[assento][assento1] = true;
-						JOptionPane.showMessageDialog(null, "CPF cadastrado");
+						JOptionPane.showMessageDialog(null, "CPF cadastrado, valor: R$ 0,01 ");
 					} else {
 						AssentosA1.assentosOcupados[assento][assento1] = false;
-						JOptionPane.showMessageDialog(null, "CPF já existente");
+						JOptionPane.showMessageDialog(null, "Assento indisponível!");
 					}
 				}
 
@@ -178,7 +179,7 @@ public class CadastroAssentos extends JFrame {
 					} else {
 						usua.setCpf(Long.parseLong(cpf));
 						usua.setNome(nome);
-						boolean a = usuarioDAO.remover(usua, assento, assento1);
+						boolean a = usuarioDAO.remover(usua, assento, assento1,salaN);
 						if (a) {
 							JOptionPane.showMessageDialog(null, "Excluido com sucesso");
 							AssentosA1.assentosOcupados[assento][assento1] = false;
@@ -204,7 +205,7 @@ public class CadastroAssentos extends JFrame {
 				System.out.println(assento);
 				System.out.println(assento1);
 
-				var retorno = UsuarioDAO.listarUsuarios(assento, assento1);
+				var retorno = UsuarioDAO.listarUsuarios(assento, assento1, salaN);
 
 				Object[] row = { retorno.getCpf(), retorno.getNome() };
 
@@ -260,7 +261,7 @@ public class CadastroAssentos extends JFrame {
 					} else {
 						usua.setCpf(Long.parseLong(cpf));
 						usua.setNome(nome);
-						boolean a = usuarioDAO.alterar(usua, assento, assento1);
+						boolean a = usuarioDAO.alterar(usua, assento, assento1, salaN);
 						if (a) {
 							JOptionPane.showMessageDialog(null, "Nome alterado!");
 						} else {
