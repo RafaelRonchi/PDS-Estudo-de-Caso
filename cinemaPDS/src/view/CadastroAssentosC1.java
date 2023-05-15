@@ -19,8 +19,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import control.Usuario;
 import control.UsuarioDAO;
+import modelo.Usuario;
 import net.miginfocom.swing.MigLayout;
 
 public class CadastroAssentosC1 extends JFrame {

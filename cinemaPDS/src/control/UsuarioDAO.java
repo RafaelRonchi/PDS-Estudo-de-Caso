@@ -2,6 +2,8 @@ package control;
 
 import java.util.ArrayList;
 
+import modelo.Usuario;
+
 public class UsuarioDAO {
     private static UsuarioDAO instancia;
     private static Usuario[][] matrizUsuarios = new Usuario[10][10];

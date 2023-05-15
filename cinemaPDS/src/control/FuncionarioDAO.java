@@ -2,6 +2,8 @@ package control;
 
 import java.util.ArrayList;
 
+import modelo.Funcionario;
+
 public class FuncionarioDAO {
 
 	private static ArrayList<Funcionario> funcionario = new ArrayList<>();
