@@ -22,8 +22,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import control.Funcionario;
 import control.FuncionarioDAO;
+import modelo.Funcionario;
 import net.miginfocom.swing.MigLayout;
 
 public class CadastrarFuncionario extends JFrame {

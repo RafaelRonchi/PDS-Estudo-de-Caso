@@ -6,8 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import control.Funcionario;
 import control.FuncionarioDAO;
+import modelo.Funcionario;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -138,7 +138,7 @@ public class JFrameMain extends JFrame {
 						});
 						contentPane.add(btnLogin, "cell 1 5,grow");
 				
-				JButton btnLimpar = new JButton("Cadastrar novo usuário");
+				JButton btnLimpar = new JButton("Cadastrar novo funcionário");
 				btnLimpar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose(); // fecha tela atual

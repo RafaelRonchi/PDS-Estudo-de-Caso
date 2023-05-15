@@ -19,8 +19,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import control.Usuario;
 import control.UsuarioDAO;
+import modelo.Usuario;
 import net.miginfocom.swing.MigLayout;
 
 public class CadastroAssentos extends JFrame {
@@ -109,6 +109,24 @@ public class CadastroAssentos extends JFrame {
 				} else {
 					usua.setCpf(cpf);
 					usua.setNome(nome);
+					// Exibir a caixa de diálogo com radio buttons
+					int escolha = JOptionPane.showOptionDialog(
+					    null,                           // Componente pai (ou null para o padrão)
+					    "O cliente paga meia?",               // Mensagem exibida
+					    "Meia entrada",                 // Título da caixa de diálogo
+					    JOptionPane.YES_NO_OPTION,      // Tipo de opções (sim/não)
+					    JOptionPane.QUESTION_MESSAGE,   // Ícone da caixa de diálogo (interrogação)
+					    null,                           // Ícones personalizados (ou null)
+					    new Object[]{"Sim", "Não"},     // Opções exibidas como radio buttons
+					    "Sim"                           // Opção padrão selecionada
+					);
+					// Verificar a escolha do usuário
+					boolean meiaEntrada = (escolha == JOptionPane.YES_OPTION);
+					if(meiaEntrada) {
+						usua.setMeiaEntrada(true);
+					} else {
+						usua.setMeiaEntrada(false);
+					}
 					boolean a = usuarioDAO.inserir(usua, assento, assento1);
 					if (a) {
 						AssentosA1.assentosOcupados[assento][assento1] = true;
