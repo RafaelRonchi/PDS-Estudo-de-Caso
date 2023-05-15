@@ -34,6 +34,7 @@ public class CadastroAssentosB1 extends JFrame {
 	public static int assento;
 	public static int assento1;
 	private JTable table;
+	public Integer salaN = 3;
 	
 
 	/**
@@ -109,13 +110,31 @@ public class CadastroAssentosB1 extends JFrame {
 				} else {
 					usua.setCpf(cpf);
 					usua.setNome(nome);
-					boolean a = usuarioDAO.inserir(usua, assento, assento1);
+					// Exibir a caixa de diálogo com radio buttons
+					int escolha = JOptionPane.showOptionDialog(
+					    null,                           // Componente pai (ou null para o padrão)
+					    "O cliente paga meia?",               // Mensagem exibida
+					    "Meia entrada",                 // Título da caixa de diálogo
+					    JOptionPane.YES_NO_OPTION,      // Tipo de opções (sim/não)
+					    JOptionPane.QUESTION_MESSAGE,   // Ícone da caixa de diálogo (interrogação)
+					    null,                           // Ícones personalizados (ou null)
+					    new Object[]{"Sim", "Não"},     // Opções exibidas como radio buttons
+					    "Sim"                           // Opção padrão selecionada
+					);
+					// Verificar a escolha do usuário
+					boolean meiaEntrada = (escolha == JOptionPane.YES_OPTION);
+					if(meiaEntrada) {
+						usua.setMeiaEntrada(true);
+					} else {
+						usua.setMeiaEntrada(false);
+					}
+					boolean a = usuarioDAO.inserir(usua, assento, assento1,salaN);
 					if (a) {
 						AssentosB1.assentosOcupados[assento][assento1] = true;
-						JOptionPane.showMessageDialog(null, "CPF cadastrado");
+						JOptionPane.showMessageDialog(null, "CPF cadastrado, valor: R$ 0,01 ");
 					} else {
 						AssentosB1.assentosOcupados[assento][assento1] = false;
-						JOptionPane.showMessageDialog(null, "CPF já existente");
+						JOptionPane.showMessageDialog(null, "Assento indisponível!");
 					}
 				}
 
@@ -160,7 +179,7 @@ public class CadastroAssentosB1 extends JFrame {
 					} else {
 						usua.setCpf(Long.parseLong(cpf));
 						usua.setNome(nome);
-						boolean a = usuarioDAO.remover(usua, assento, assento1);
+						boolean a = usuarioDAO.remover(usua, assento, assento1,salaN);
 						if (a) {
 							JOptionPane.showMessageDialog(null, "Excluido com sucesso");
 							AssentosB1.assentosOcupados[assento][assento1] = false;
@@ -186,7 +205,7 @@ public class CadastroAssentosB1 extends JFrame {
 				System.out.println(assento);
 				System.out.println(assento1);
 
-				var retorno = UsuarioDAO.listarUsuarios(assento, assento1);
+				var retorno = UsuarioDAO.listarUsuarios(assento, assento1,salaN);
 
 				Object[] row = { retorno.getCpf(), retorno.getNome() };
 
@@ -242,7 +261,7 @@ public class CadastroAssentosB1 extends JFrame {
 					} else {
 						usua.setCpf(Long.parseLong(cpf));
 						usua.setNome(nome);
-						boolean a = usuarioDAO.alterar(usua, assento, assento1);
+						boolean a = usuarioDAO.alterar(usua, assento, assento1,salaN);
 						if (a) {
 							JOptionPane.showMessageDialog(null, "Nome alterado!");
 						} else {
