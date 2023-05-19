@@ -35,7 +35,7 @@ public class CadastroAssentos extends JFrame {
 	public static int assento1;
 	private JTable table;
 	public Integer salaN = 1;
-	
+	private Float valorIngresso= (float) 22;
 
 	/**
 	 * Launch the application.
@@ -125,13 +125,14 @@ public class CadastroAssentos extends JFrame {
 					boolean meiaEntrada = (escolha == JOptionPane.YES_OPTION);
 					if(meiaEntrada) {
 						usua.setMeiaEntrada(true);
+							valorIngresso=valorIngresso/2;
 					} else {
 						usua.setMeiaEntrada(false);
 					}
 					boolean a = usuarioDAO.inserir(usua, assento, assento1, salaN);
 					if (a) {
 						AssentosA1.assentosOcupados[assento][assento1] = true;
-						JOptionPane.showMessageDialog(null, "CPF cadastrado, valor: R$ 0,01 ");
+						JOptionPane.showMessageDialog(null, "CPF cadastrado, valor:R$"+valorIngresso);
 					} else {
 						
 						JOptionPane.showMessageDialog(null, "Assento indisponível!");
@@ -266,6 +267,9 @@ public class CadastroAssentos extends JFrame {
 							JOptionPane.showMessageDialog(null, "Nome alterado!");
 						} else {
 							JOptionPane.showMessageDialog(null, "Erro, CPF não encontrado!");
+					
+						
+						
 						}
 					}
 				}
