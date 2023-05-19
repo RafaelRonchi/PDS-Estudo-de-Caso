@@ -133,7 +133,7 @@ public class CadastroAssentosA2 extends JFrame {
 						AssentosA2.assentosOcupados[assento][assento1] = true;
 						JOptionPane.showMessageDialog(null, "CPF cadastrado, R$ 0,01 ");
 					} else {
-						AssentosA2.assentosOcupados[assento][assento1] = false;
+					
 						JOptionPane.showMessageDialog(null, "Assento indisponível!");
 					}
 				}
