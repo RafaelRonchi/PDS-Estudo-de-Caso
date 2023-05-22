@@ -97,14 +97,17 @@ public class CadastroAssentos extends JFrame {
 						contentPane.add(txtCpf, "cell 2 5,growx,aligny center");
 						txtCpf.setColumns(10);
 				
-				JRadioButton rdbtnNewRadioButton = new JRadioButton("Paga meia");
-				rdbtnNewRadioButton.setBackground(Color.WHITE);
-				contentPane.add(rdbtnNewRadioButton, "cell 2 6,alignx center");
+				
 		
 				JButton btnExcluir = new JButton("Excluir");
 				
 						btnExcluir.setVisible(true);
 								
+						JRadioButton pagaMeia = new JRadioButton("Paga meia?");
+						pagaMeia.setBackground(new Color(0,0,64));
+						pagaMeia.setForeground(Color.WHITE);
+						contentPane.add(pagaMeia, "cell 2 6,alignx center");
+						;
 										JButton btnCadastrar = new JButton("Cadastar");
 										btnCadastrar.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
 										btnCadastrar.setBackground(Color.WHITE);
@@ -121,24 +124,14 @@ public class CadastroAssentos extends JFrame {
 												} else {
 													usua.setCpf(cpf);
 													usua.setNome(nome);
-													// Exibir a caixa de diálogo com radio buttons
-													int escolha = JOptionPane.showOptionDialog(
-													    null,                           // Componente pai (ou null para o padrão)
-													    "O cliente paga meia?",               // Mensagem exibida
-													    "Meia entrada",                 // Título da caixa de diálogo
-													    JOptionPane.YES_NO_OPTION,      // Tipo de opções (sim/não)
-													    JOptionPane.QUESTION_MESSAGE,   // Ícone da caixa de diálogo (interrogação)
-													    null,                           // Ícones personalizados (ou null)
-													    new Object[]{"Sim", "Não"},     // Opções exibidas como radio buttons
-													    "Sim"                           // Opção padrão selecionada
-													);
-													// Verificar a escolha do usuário
-													boolean meiaEntrada = (escolha == JOptionPane.YES_OPTION);
-													if(meiaEntrada) {
+													
+													if (pagaMeia.isSelected()){
 														usua.setMeiaEntrada(true);
-															valorIngresso=valorIngresso/2;
-													} else {
-														usua.setMeiaEntrada(false);
+														valorIngresso=valorIngresso/2;
+													}
+													else {
+													valorIngresso = valorIngresso;
+													usua.setMeiaEntrada(false);
 													}
 													boolean a = usuarioDAO.inserir(usua, assento, assento1, salaN);
 													if (a) {
@@ -155,6 +148,11 @@ public class CadastroAssentos extends JFrame {
 											}
 										});
 										contentPane.add(btnCadastrar, "cell 2 8,alignx center,growy");
+								
+								
+								//fazer com que essa tabela so possa ser vista quando um cliente for 
+								//associado ao assento(de forma automatica sem o botao listar)
+
 						
 								btnExcluir.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
 								contentPane.add(btnExcluir, "cell 2 9,alignx center,aligny center");
