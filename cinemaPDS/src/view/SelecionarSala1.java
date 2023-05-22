@@ -95,7 +95,7 @@ public void actionPerformed(ActionEvent e) {
 		contentPane.add(lblNewLabel1, "cell 1 3,growx,aligny center");
 		
 		//2
-		JLabel lblNewLabel = new JLabel("13:35 - Sala A1");
+		JLabel lblNewLabel = new JLabel("13:35 - Sala A2");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(Color.LIGHT_GRAY);
 		lblNewLabel.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 21));
