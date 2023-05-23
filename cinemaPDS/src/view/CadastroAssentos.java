@@ -37,16 +37,15 @@ public class CadastroAssentos extends JFrame {
 	public static int assento1;
 	private JTable table;
 	public Integer salaN = 1;
-	private Double valorIngresso= 20.00;
+	private Double valorIngresso = 20.00;
 
 	/**
 	 * Launch the application.
 	 */
-	
 
 	public CadastroAssentos(int row, int col) {
 		this.assento = row;
-        this.assento1 = col;
+		this.assento1 = col;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 974, 548);
 		contentPane = new JPanel();
@@ -54,7 +53,9 @@ public class CadastroAssentos extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[119.00px,grow 71][138.00px,grow][170px][151.00][200.00][54.00px,grow][119.00px,grow 71]", "[grow][53px][grow][41px][9.00px][45px][][][][16.00][55.00px][29.00,grow][grow]"));
+		contentPane.setLayout(new MigLayout("",
+				"[119.00px,grow 71][138.00px,grow][170px][151.00][200.00][54.00px,grow][119.00px,grow 71]",
+				"[grow][53px][grow][41px][9.00px][45px][][][][16.00][55.00px][29.00,grow][grow]"));
 
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.setBackground(new Color(255, 255, 255));
@@ -77,33 +78,33 @@ public class CadastroAssentos extends JFrame {
 
 		JPanel panel = new JPanel();
 		panel.setVisible(true);
-								
-										JLabel lblNewLabel = new JLabel("Nome:");
-										lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-										lblNewLabel.setForeground(new Color(255, 255, 255));
-										lblNewLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 30));
-										contentPane.add(lblNewLabel, "cell 1 3,alignx center,aligny center");
-						
-								txtNome = new JTextField();
-								contentPane.add(txtNome, "cell 2 3 3 1,growx,aligny center");
-								txtNome.setColumns(10);
-						;
-										
-												JLabel lblNewLabel_1 = new JLabel("Cpf:");
-												lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-												lblNewLabel_1.setForeground(new Color(255, 255, 255));
-												lblNewLabel_1.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 30));
-												contentPane.add(lblNewLabel_1, "cell 1 5,alignx center,growy");
-								
-										txtCpf = new JTextField();
-										contentPane.add(txtCpf, "cell 2 5 3 1,growx,aligny center");
-										txtCpf.setColumns(10);
-		
-						JRadioButton pagaMeia = new JRadioButton("Paga meia?");
-						pagaMeia.setFont(new Font("Tahoma", Font.BOLD, 15));
-						pagaMeia.setBackground(new Color(0,0,64));
-						pagaMeia.setForeground(Color.WHITE);
-						contentPane.add(pagaMeia, "cell 1 6 5 1,alignx center");
+
+		JLabel lblNewLabel = new JLabel("Nome:");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 30));
+		contentPane.add(lblNewLabel, "cell 1 3,alignx center,aligny center");
+
+		txtNome = new JTextField();
+		contentPane.add(txtNome, "cell 2 3 3 1,growx,aligny center");
+		txtNome.setColumns(10);
+		;
+
+		JLabel lblNewLabel_1 = new JLabel("Cpf:");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 30));
+		contentPane.add(lblNewLabel_1, "cell 1 5,alignx center,growy");
+
+		txtCpf = new JTextField();
+		contentPane.add(txtCpf, "cell 2 5 3 1,growx,aligny center");
+		txtCpf.setColumns(10);
+
+		JRadioButton pagaMeia = new JRadioButton("Paga meia?");
+		pagaMeia.setFont(new Font("Tahoma", Font.BOLD, 15));
+		pagaMeia.setBackground(new Color(0, 0, 64));
+		pagaMeia.setForeground(Color.WHITE);
+		contentPane.add(pagaMeia, "cell 1 6 5 1,alignx center");
 		JButton btnCadastrar = new JButton("Cadastar");
 		btnCadastrar.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
 		btnCadastrar.setBackground(Color.WHITE);
@@ -120,21 +121,20 @@ public class CadastroAssentos extends JFrame {
 				} else {
 					usua.setCpf(cpf);
 					usua.setNome(nome);
-					
-					if (pagaMeia.isSelected()){
+
+					if (pagaMeia.isSelected()) {
 						usua.setMeiaEntrada(true);
-						usua.setPrecoIngresso(valorIngresso/2);
-					}
-					else {
-					usua.setMeiaEntrada(false);
-					usua.setPrecoIngresso(valorIngresso);
+						usua.setPrecoIngresso(valorIngresso / 2);
+					} else {
+						usua.setMeiaEntrada(false);
+						usua.setPrecoIngresso(valorIngresso);
 					}
 					boolean a = usuarioDAO.inserir(usua, assento, assento1, salaN);
 					if (a) {
 						AssentosA1.assentosOcupados[assento][assento1] = true;
 						JOptionPane.showMessageDialog(null, "CPF cadastrado, valor: R$" + usua.getPrecoIngresso());
 					} else {
-						
+
 						JOptionPane.showMessageDialog(null, "Assento indisponível!");
 					}
 				}
@@ -190,64 +190,59 @@ public class CadastroAssentos extends JFrame {
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "CPF", "Nome", "Preço" }));
 		panel.add(table, "cell 0 1 5 1,grow");
 
-
 		JButton btnAlterar = new JButton("Alterar");
 		btnAlterar.setVisible(true);
 		btnAlterar.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
 		contentPane.add(btnAlterar, "flowx,cell 1 12 2 1,alignx center");
 		btnAlterar.setBackground(Color.WHITE);
-		
-		
-		
+
 		JButton btnExcluir = new JButton("Excluir");
-		
-				btnExcluir.setVisible(true);
-				
-				
-				//fazer com que essa tabela so possa ser vista quando um cliente for 
-				//associado ao assento(de forma automatica sem o botao listar)
 
-						
-				btnExcluir.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
-				contentPane.add(btnExcluir, "cell 4 12 2 1,alignx center");
-				btnExcluir.setBackground(Color.WHITE);
-				btnExcluir.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Usuario usua = new Usuario();
-						// Criação dos componentes do painel
-						JTextField campo1 = new JTextField();
-						JTextField campo2 = new JTextField();
+		btnExcluir.setVisible(true);
 
-						JPanel painel = new JPanel(new GridLayout(0, 2)); // Criação do painel personalizado
-						painel.add(new JLabel("CPF:"));
-						painel.add(campo1);
-						painel.add(new JLabel("Nome:"));
-						painel.add(campo2);
+		// fazer com que essa tabela so possa ser vista quando um cliente for
+		// associado ao assento(de forma automatica sem o botao listar)
 
-						int opcao = JOptionPane.showOptionDialog(null, painel, "Digite o CPF e NOME para EXCLUSÃO!",
-								JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+		btnExcluir.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
+		contentPane.add(btnExcluir, "cell 4 12 2 1,alignx center");
+		btnExcluir.setBackground(Color.WHITE);
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Usuario usua = new Usuario();
+				// Criação dos componentes do painel
+				JTextField campo1 = new JTextField();
+				JTextField campo2 = new JTextField();
 
-						if (opcao == JOptionPane.OK_OPTION) {
-							String cpf = campo1.getText(); // Obtenção do valor do campo1
-							String nome = campo2.getText(); // Obtenção do valor do campo2
+				JPanel painel = new JPanel(new GridLayout(0, 2)); // Criação do painel personalizado
+				painel.add(new JLabel("CPF:"));
+				painel.add(campo1);
+				painel.add(new JLabel("Nome:"));
+				painel.add(campo2);
 
-							if (nome.isEmpty() || cpf.isEmpty()) {
-								JOptionPane.showMessageDialog(null, "Nome ou CPF nulos!");
-							} else {
-								usua.setCpf(Long.parseLong(cpf));
-								usua.setNome(nome);
-								boolean a = usuarioDAO.remover(usua, assento, assento1,salaN);
-								if (a) {
-									JOptionPane.showMessageDialog(null, "Excluido com sucesso");
-									AssentosA1.assentosOcupados[assento][assento1] = false;
-								} else {
-									JOptionPane.showMessageDialog(null, "Erro, CPF ou/e Nome não encontrado!");
-								}
-							}
+				int opcao = JOptionPane.showOptionDialog(null, painel, "Digite o CPF e NOME para EXCLUSÃO!",
+						JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+
+				if (opcao == JOptionPane.OK_OPTION) {
+					String cpf = campo1.getText(); // Obtenção do valor do campo1
+					String nome = campo2.getText(); // Obtenção do valor do campo2
+
+					if (nome.isEmpty() || cpf.isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Nome ou CPF nulos!");
+					} else {
+						usua.setCpf(Long.parseLong(cpf));
+						usua.setNome(nome);
+						boolean a = usuarioDAO.remover(usua, assento, assento1, salaN);
+						if (a) {
+							JOptionPane.showMessageDialog(null, "Excluido com sucesso");
+							AssentosA1.assentosOcupados[assento][assento1] = false;
+						} else {
+							JOptionPane.showMessageDialog(null, "Erro, CPF ou/e Nome não encontrado!");
 						}
-
 					}
-				});
+				}
+
+			}
+		});
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Usuario usua = new Usuario();
@@ -262,9 +257,9 @@ public class CadastroAssentos extends JFrame {
 				painel.add(campo2);
 				painel.add(radioMeia); // Add the radio button to the panel
 
-				int opcao = JOptionPane.showOptionDialog(null, painel, "Digite o CPF e informe o nome e preço para alterar",
-				        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
-
+				int opcao = JOptionPane.showOptionDialog(null, painel,
+						"Digite o CPF e informe o nome e preço para alterar", JOptionPane.OK_CANCEL_OPTION,
+						JOptionPane.PLAIN_MESSAGE, null, null, null);
 
 				if (opcao == JOptionPane.OK_OPTION) {
 					String cpf = campo1.getText(); // Obtenção do valor do campo1
@@ -276,21 +271,18 @@ public class CadastroAssentos extends JFrame {
 						usua.setCpf(Long.parseLong(cpf));
 						usua.setNome(nome);
 						boolean isMeia = radioMeia.isSelected();
-						if(isMeia) {
-							usua.setPrecoIngresso(valorIngresso/2);
+						if (isMeia) {
+							usua.setPrecoIngresso(valorIngresso / 2);
 						} else {
 							usua.setPrecoIngresso(valorIngresso);
 						}
-						
 
 						boolean a = usuarioDAO.alterar(usua, assento, assento1, salaN);
 						if (a) {
 							JOptionPane.showMessageDialog(null, "Nome e/ou preço alterado!");
 						} else {
 							JOptionPane.showMessageDialog(null, "Erro, CPF não encontrado!");
-					
-						
-						
+
 						}
 					}
 				}
