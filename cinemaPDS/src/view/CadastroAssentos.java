@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -36,7 +37,7 @@ public class CadastroAssentos extends JFrame {
 	public static int assento1;
 	private JTable table;
 	public Integer salaN = 1;
-	private Float valorIngresso= (float) 22;
+	private Double valorIngresso= 20.00;
 
 	/**
 	 * Launch the application.
@@ -53,7 +54,7 @@ public class CadastroAssentos extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[119.00px,grow 71][138.00px,grow][170px][151.00][200.00][54.00px,grow][119.00px,grow 71]", "[grow][53px][grow][41px][9.00px][45px][][][][16.00][10.00px,grow][6][grow]"));
+		contentPane.setLayout(new MigLayout("", "[119.00px,grow 71][138.00px,grow][170px][151.00][200.00][54.00px,grow][119.00px,grow 71]", "[grow][53px][grow][41px][9.00px][45px][][][][16.00][55.00px][29.00,grow][grow]"));
 
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.setBackground(new Color(255, 255, 255));
@@ -72,7 +73,7 @@ public class CadastroAssentos extends JFrame {
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 66));
-		contentPane.add(lblNewLabel_2, "cell 1 0 5 3,alignx center,growy");
+		contentPane.add(lblNewLabel_2, "cell 1 0 5 2,alignx center,aligny top");
 
 		JPanel panel = new JPanel();
 		panel.setVisible(true);
@@ -122,16 +123,16 @@ public class CadastroAssentos extends JFrame {
 					
 					if (pagaMeia.isSelected()){
 						usua.setMeiaEntrada(true);
-						valorIngresso=valorIngresso/2;
+						usua.setPrecoIngresso(valorIngresso/2);
 					}
 					else {
-					valorIngresso = valorIngresso;
 					usua.setMeiaEntrada(false);
+					usua.setPrecoIngresso(valorIngresso);
 					}
 					boolean a = usuarioDAO.inserir(usua, assento, assento1, salaN);
 					if (a) {
 						AssentosA1.assentosOcupados[assento][assento1] = true;
-						JOptionPane.showMessageDialog(null, "CPF cadastrado, valor:R$"+valorIngresso);
+						JOptionPane.showMessageDialog(null, "CPF cadastrado, valor: R$" + usua.getPrecoIngresso());
 					} else {
 						
 						JOptionPane.showMessageDialog(null, "Assento indisponível!");
@@ -142,7 +143,7 @@ public class CadastroAssentos extends JFrame {
 				txtNome.setText(null);
 			}
 		});
-		contentPane.add(btnCadastrar, "cell 1 7 5 1,grow");
+		contentPane.add(btnCadastrar, "cell 1 7 5 1,alignx center,growy");
 
 		JButton btnListar = new JButton("Listar Cadastros");
 		contentPane.add(btnListar, "cell 1 9 5 1,grow");
@@ -159,7 +160,7 @@ public class CadastroAssentos extends JFrame {
 
 				var retorno = UsuarioDAO.listarUsuarios(assento, assento1, salaN);
 
-				Object[] row = { retorno.getCpf(), retorno.getNome() };
+				Object[] row = { retorno.getCpf(), retorno.getNome(), retorno.getPrecoIngresso() };
 
 				model.addRow(row);
 
@@ -168,25 +169,32 @@ public class CadastroAssentos extends JFrame {
 
 		panel.setBackground(new Color(255, 255, 255));
 		contentPane.add(panel, "cell 1 10 5 1,grow");
-		panel.setLayout(new MigLayout("", "[100px,grow][][100px,grow]", "[20px][grow]"));
+		panel.setLayout(new MigLayout("", "[100px,grow][][100px,grow][][100px,grow]", "[20px][grow]"));
 
 		JLabel cpfLabel = new JLabel("CPF");
-		panel.add(cpfLabel, "cell 0 0, width 50, alignx center, aligny center");
+		panel.add(cpfLabel, "cell 0 0,width 50,alignx center,aligny center");
 
-		JSeparator separator = new JSeparator(SwingConstants.VERTICAL);
-		panel.add(separator, "cell 1 0,width 4,alignx center,growy");
+		JSeparator separator1 = new JSeparator(SwingConstants.VERTICAL);
+		panel.add(separator1, "cell 1 0,width 4,alignx center,growy");
 
 		JLabel nomeLabel = new JLabel("Nome");
 		panel.add(nomeLabel, "cell 2 0,width 50,alignx center,aligny center");
+
+		JSeparator separator2 = new JSeparator(SwingConstants.VERTICAL);
+		panel.add(separator2, "cell 3 0,width 4,alignx center,growy");
+
+		JLabel precoLabel = new JLabel("Preço");
+		panel.add(precoLabel, "cell 4 0,width 50,alignx center,aligny center");
+
 		table = new JTable();
-		table = new JTable();
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "CPF", "Nome" }));
-		panel.add(table, "cell 0 1 3 1,grow");
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "CPF", "Nome", "Preço" }));
+		panel.add(table, "cell 0 1 5 1,grow");
+
 
 		JButton btnAlterar = new JButton("Alterar");
 		btnAlterar.setVisible(true);
 		btnAlterar.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
-		contentPane.add(btnAlterar, "flowx,cell 1 12 2 1,alignx center,aligny center");
+		contentPane.add(btnAlterar, "flowx,cell 1 12 2 1,alignx center");
 		btnAlterar.setBackground(Color.WHITE);
 		
 		
@@ -201,7 +209,7 @@ public class CadastroAssentos extends JFrame {
 
 						
 				btnExcluir.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
-				contentPane.add(btnExcluir, "cell 4 12 2 1,alignx center,aligny center");
+				contentPane.add(btnExcluir, "cell 4 12 2 1,alignx center");
 				btnExcluir.setBackground(Color.WHITE);
 				btnExcluir.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -243,19 +251,20 @@ public class CadastroAssentos extends JFrame {
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Usuario usua = new Usuario();
-				// Criação dos componentes do painel
+				JRadioButton radioMeia = new JRadioButton("Meia-entrada");
 				JTextField campo1 = new JTextField();
 				JTextField campo2 = new JTextField();
-				
 
-				JPanel painel = new JPanel(new GridLayout(0, 2)); // Criação do painel personalizado
+				JPanel painel = new JPanel(new GridLayout(0, 2));
 				painel.add(new JLabel("CPF:"));
 				painel.add(campo1);
-				painel.add(new JLabel("Novo nome:"));
+				painel.add(new JLabel("Nome:"));
 				painel.add(campo2);
+				painel.add(radioMeia); // Add the radio button to the panel
 
-				int opcao = JOptionPane.showOptionDialog(null, painel, "Digite o CPF e um novo NOME",
-						JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+				int opcao = JOptionPane.showOptionDialog(null, painel, "Digite o CPF e informe o nome e preço para alterar",
+				        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+
 
 				if (opcao == JOptionPane.OK_OPTION) {
 					String cpf = campo1.getText(); // Obtenção do valor do campo1
@@ -266,9 +275,17 @@ public class CadastroAssentos extends JFrame {
 					} else {
 						usua.setCpf(Long.parseLong(cpf));
 						usua.setNome(nome);
+						boolean isMeia = radioMeia.isSelected();
+						if(isMeia) {
+							usua.setPrecoIngresso(valorIngresso/2);
+						} else {
+							usua.setPrecoIngresso(valorIngresso);
+						}
+						
+
 						boolean a = usuarioDAO.alterar(usua, assento, assento1, salaN);
 						if (a) {
-							JOptionPane.showMessageDialog(null, "Nome alterado!");
+							JOptionPane.showMessageDialog(null, "Nome e/ou preço alterado!");
 						} else {
 							JOptionPane.showMessageDialog(null, "Erro, CPF não encontrado!");
 					
