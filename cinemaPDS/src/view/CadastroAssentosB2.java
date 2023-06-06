@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -44,6 +45,8 @@ public class CadastroAssentosB2 extends JFrame {
 	 */
 
 	public CadastroAssentosB2(int row, int col) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(JFrameMain.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
+
 		this.assento = row;
 		this.assento1 = col;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
