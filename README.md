@@ -33,3 +33,25 @@ Para executar o projeto, basta seguir os seguintes passos:
 
 Este projeto foi desenvolvido por [Rafael Ronchi](https://github.com/RafaelRonchi) e [Nicolas Maba](https://github.com/NicolasRicardoMaba).
 
+# 🖥️ Telas do Sistema:
+
+- `Entrar no sistema`: Tela para logar no sistema como funcionário.
+ ![Tela1](https://github.com/RafaelRonchi/PDS-Estudo-de-Caso/assets/95860101/109c0d1b-e9c3-4a37-a1d5-9a580a09598e)
+ 
+- `Cadastrar funcionários`: Tela para cadastrar os perfis de funcionários.
+![Tela2](https://github.com/RafaelRonchi/PDS-Estudo-de-Caso/assets/95860101/b0a9a7a7-6763-4d11-939c-7ceb2965ad97)
+
+- `Selecionar filme`: Tela para selecionar um dos três filmes.
+ ![Tela3](https://github.com/RafaelRonchi/PDS-Estudo-de-Caso/assets/95860101/91a36084-611a-47d2-94c1-9c0d290e519d)
+ 
+- `Selecionar sala`: Tela para selecionar a sala do filme.
+ ![Tela4](https://github.com/RafaelRonchi/PDS-Estudo-de-Caso/assets/95860101/956ec7ac-d733-4918-b93d-7f1ae8dcac0a)
+ 
+ - `Selecionar os assentos`: Tela para selecionar os assentos da sala.
+![Tela5](https://github.com/RafaelRonchi/PDS-Estudo-de-Caso/assets/95860101/c8ed091a-5564-4fee-8251-d3153b7cfd62)
+
+- `Cadastrar cliente`: Tela para cadastrar um cliente ao assento.
+![Tela6](https://github.com/RafaelRonchi/PDS-Estudo-de-Caso/assets/95860101/fdcb2c5a-bccb-4ecd-bfee-ba713ee23f9b)
+
+ - `Selecionar os assentos`: Tela dos assentos após cadastrar um cliente!
+![Tela7](https://github.com/RafaelRonchi/PDS-Estudo-de-Caso/assets/95860101/6f38a2ed-9a3a-4e2a-b3a4-abf7e37c898e)
