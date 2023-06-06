@@ -1,3 +1,5 @@
+> :construction: Projeto em construção :construction:
+
 # Projeto Java com Window Builder JFrame - Cadastro de Funcionários e Alocação de Assentos de Cinema
 
 Este é um projeto em desenvolvimento da matéria de PDS do IFSC. Utiliza o Java e o Window Builder JFrame para criar uma aplicação que permite o cadastro de funcionários e a alocação de assentos de cinema para um comprador. O projeto não utiliza banco de dados e faz uso de um ArrayList para armazenar os dados.
