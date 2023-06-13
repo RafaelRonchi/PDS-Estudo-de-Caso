@@ -58,7 +58,7 @@ public class UsuarioDAO {
 		}
 		case 5: {
 			if (matrizUsuariosC1[i][j] == null) {
-	               matrizUsuariosC2[i][j] = u;
+	               matrizUsuariosC1[i][j] = u;
 	              return true;            
 	    	}
 			break;

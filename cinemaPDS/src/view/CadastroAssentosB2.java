@@ -7,9 +7,11 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import control.UsuarioDAO;
 import modelo.Usuario;
@@ -39,16 +42,16 @@ public class CadastroAssentosB2 extends JFrame {
 	private JTable table;
 	public Integer salaN = 4;
 	private Double valorIngresso = 20.00;
-
+	private JFormattedTextField campo1;
 	/**
 	 * Launch the application.
 	 */
 
 	public CadastroAssentosB2(int row, int col) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(JFrameMain.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
-
 		this.assento = row;
 		this.assento1 = col;
+		setIconImage(Toolkit.getDefaultToolkit().getImage(JFrameMain.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 974, 548);
 		contentPane = new JPanel();
@@ -98,8 +101,17 @@ public class CadastroAssentosB2 extends JFrame {
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 30));
 		contentPane.add(lblNewLabel_1, "cell 1 5,alignx center,growy");
+	
+		MaskFormatter cpfFormatter = null;
+		try {
+			cpfFormatter = new MaskFormatter("###.###.###-##");
 
-		txtCpf = new JTextField();
+			// cpfFormatter.setPlaceholderCharacter('_');
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		txtCpf = new JFormattedTextField(cpfFormatter);
+		
 		contentPane.add(txtCpf, "cell 2 5 3 1,growx,aligny center");
 		txtCpf.setColumns(10);
 
@@ -116,13 +128,19 @@ public class CadastroAssentosB2 extends JFrame {
 
 				UsuarioDAO usuarioDAO = UsuarioDAO.getInstancia();
 				Usuario usua = new Usuario();
-				Long cpf = Long.parseLong(txtCpf.getText());
+				String cpf = txtCpf.getText();
+				cpf = cpf.replace(".", "");
+				cpf = cpf.replace("-", "");
+				cpf = cpf.trim();
+				Long cpf1=null;
+				cpf1 = Long.parseLong(cpf);
+
 				String nome = txtNome.getText();
 
-				if (nome.isEmpty() || cpf == null) {
+				if (nome.isEmpty() || cpf.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Nome ou CPF nulos!");
 				} else {
-					usua.setCpf(cpf);
+					usua.setCpf(cpf1);
 					usua.setNome(nome);
 
 					if (pagaMeia.isSelected()) {
@@ -134,7 +152,7 @@ public class CadastroAssentosB2 extends JFrame {
 					}
 					boolean a = usuarioDAO.inserir(usua, assento, assento1, salaN);
 					if (a) {
-						AssentosA1.assentosOcupados[assento][assento1] = true;
+						AssentosB2.assentosOcupados[assento][assento1] = true;
 						JOptionPane.showMessageDialog(null, "CPF cadastrado, valor: R$" + usua.getPrecoIngresso());
 					} else {
 
@@ -162,12 +180,21 @@ public class CadastroAssentosB2 extends JFrame {
 				System.out.println(assento1);
 
 				var retorno = UsuarioDAO.listarUsuarios(assento, assento1, salaN);
+				StringBuilder cpfFormatado = new StringBuilder();
+				String numeros = String.valueOf(retorno.getCpf());
+				cpfFormatado.append(numeros.substring(0, 3));
+				cpfFormatado.append(".");
+				cpfFormatado.append(numeros.substring(3, 6));
+				cpfFormatado.append(".");
+				cpfFormatado.append(numeros.substring(6, 9));
+				cpfFormatado.append("-");
+				cpfFormatado.append(numeros.substring(9, 11));
 
-				Object[] row = { retorno.getCpf(), retorno.getNome(), retorno.getPrecoIngresso() };
-
+				cpfFormatado.toString();
+				Object[] row = { cpfFormatado, retorno.getNome(),retorno.getPrecoIngresso() };
 				model.addRow(row);
-
 			}
+			
 		});
 
 		panel.setBackground(new Color(255, 255, 255));
@@ -203,8 +230,7 @@ public class CadastroAssentosB2 extends JFrame {
 
 		btnExcluir.setVisible(true);
 
-		// fazer com que essa tabela so possa ser vista quando um cliente for
-		// associado ao assento(de forma automatica sem o botao listar)
+
 
 		btnExcluir.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
 		contentPane.add(btnExcluir, "cell 4 12 2 1,alignx center");
@@ -213,31 +239,42 @@ public class CadastroAssentosB2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Usuario usua = new Usuario();
 				// Criação dos componentes do painel
-				JTextField campo1 = new JTextField();
-				JTextField campo2 = new JTextField();
-
+				MaskFormatter cpfFormatter = null;
+				try {
+					cpfFormatter = new MaskFormatter("###.###.###-##");
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				JPanel painel = new JPanel(new GridLayout(0, 2)); // Criação do painel personalizado
 				painel.add(new JLabel("CPF:"));
+				campo1 = new JFormattedTextField(cpfFormatter);// Criação do painel personalizado
 				painel.add(campo1);
 				painel.add(new JLabel("Nome:"));
+				JTextField campo2 = new JTextField();
 				painel.add(campo2);
 
 				int opcao = JOptionPane.showOptionDialog(null, painel, "Digite o CPF e NOME para EXCLUSÃO!",
 						JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 
 				if (opcao == JOptionPane.OK_OPTION) {
-					String cpf = campo1.getText(); // Obtenção do valor do campo1
-					String nome = campo2.getText(); // Obtenção do valor do campo2
+					Long cpf1 = null;
+					String cpf = campo1.getText();
+					cpf = cpf.replace(".", "");
+					cpf = cpf.replace("-", "");
+					cpf = cpf.trim();
+					cpf1 = Long.parseLong(cpf);
+					String nome = campo2.getText();
 
 					if (nome.isEmpty() || cpf.isEmpty()) {
 						JOptionPane.showMessageDialog(null, "Nome ou CPF nulos!");
 					} else {
-						usua.setCpf(Long.parseLong(cpf));
+						usua.setCpf(cpf1);
 						usua.setNome(nome);
 						boolean a = usuarioDAO.remover(usua, assento, assento1, salaN);
 						if (a) {
 							JOptionPane.showMessageDialog(null, "Excluido com sucesso");
-							AssentosA1.assentosOcupados[assento][assento1] = false;
+							AssentosB2.assentosOcupados[assento][assento1] = false;
 						} else {
 							JOptionPane.showMessageDialog(null, "Erro, CPF ou/e Nome não encontrado!");
 						}
@@ -250,8 +287,15 @@ public class CadastroAssentosB2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Usuario usua = new Usuario();
 				JRadioButton radioMeia = new JRadioButton("Meia-entrada");
-				JTextField campo1 = new JTextField();
+				MaskFormatter cpfFormatter = null;
+				try {
+					cpfFormatter = new MaskFormatter("###.###.###-##");
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				JTextField campo2 = new JTextField();
+				campo1 = new JFormattedTextField(cpfFormatter);// Criação do painel personalizado
 
 				JPanel painel = new JPanel(new GridLayout(0, 2));
 				painel.add(new JLabel("CPF:"));
@@ -259,19 +303,23 @@ public class CadastroAssentosB2 extends JFrame {
 				painel.add(new JLabel("Nome:"));
 				painel.add(campo2);
 				painel.add(radioMeia); // Add the radio button to the panel
-
 				int opcao = JOptionPane.showOptionDialog(null, painel,
 						"Digite o CPF e informe o nome e preço para alterar", JOptionPane.OK_CANCEL_OPTION,
 						JOptionPane.PLAIN_MESSAGE, null, null, null);
 
 				if (opcao == JOptionPane.OK_OPTION) {
-					String cpf = campo1.getText(); // Obtenção do valor do campo1
-					String nome = campo2.getText(); // Obtenção do valor do campo2
-
+					Long cpf1 = null;
+					String cpf = campo1.getText();
+					cpf = cpf.replace(".", "");
+					cpf = cpf.replace("-", "");
+					cpf = cpf.trim();
+					cpf1 = Long.parseLong(cpf);
+					String nome = campo2.getText();
+					
 					if (nome.isEmpty() || cpf.isEmpty()) {
 						JOptionPane.showMessageDialog(null, "Nome ou CPF nulos!");
 					} else {
-						usua.setCpf(Long.parseLong(cpf));
+						usua.setCpf(cpf1);
 						usua.setNome(nome);
 						boolean isMeia = radioMeia.isSelected();
 						if (isMeia) {

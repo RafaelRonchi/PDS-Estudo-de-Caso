@@ -100,8 +100,8 @@ public class AssentosA2 extends JFrame {
 						selctSala.setExtendedState(JFrame.MAXIMIZED_BOTH);
 						selctSala.setVisible(true);
 
-						selctSala.assento = finalRow;
-						selctSala.assento1 = finalCol;
+						CadastroAssentosA2.assento = finalRow;
+						CadastroAssentosA2.assento1 = finalCol;
 					}
 				});
 			}
