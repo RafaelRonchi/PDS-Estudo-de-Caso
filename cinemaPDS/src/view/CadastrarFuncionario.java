@@ -35,6 +35,7 @@ public class CadastrarFuncionario extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtNome;
 	private JTextField txtCpf;
+	private JTextField campo1;
 	private JTable table;
 	private FuncionarioDAO funcionarioDAO = FuncionarioDAO.getInstancia();
 
@@ -63,9 +64,12 @@ public class CadastrarFuncionario extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * 
+	 * @throws ParseException
 	 */
-	public CadastrarFuncionario() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(JFrameMain.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
+	public CadastrarFuncionario() throws ParseException {
+		setIconImage(Toolkit.getDefaultToolkit()
+				.getImage(JFrameMain.class.getResource("/Images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 974, 548);
 		contentPane = new JPanel();
@@ -193,10 +197,17 @@ public class CadastrarFuncionario extends JFrame {
 				Funcionario funcio = new Funcionario();
 
 				// Criação dos componentes do painel
-				JTextField campo1 = new JTextField();
+				MaskFormatter cpfFormatter = null;
+				try {
+					cpfFormatter = new MaskFormatter("###.###.###-##");
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				JTextField campo2 = new JTextField();
 
-				JPanel painel = new JPanel(new GridLayout(0, 2)); // Criação do painel personalizado
+				JPanel painel = new JPanel(new GridLayout(0, 2));
+				campo1 = new JFormattedTextField(cpfFormatter);// Criação do painel personalizado
 				painel.add(new JLabel("CPF:"));
 				painel.add(campo1);
 				painel.add(new JLabel("Nome:"));
@@ -206,13 +217,18 @@ public class CadastrarFuncionario extends JFrame {
 						JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 
 				if (opcao == JOptionPane.OK_OPTION) {
-					String cpf = campo1.getText(); // Obtenção do valor do campo1
-					String nome = campo2.getText(); // Obtenção do valor do campo2
+					Long cpf1 = null;
+					String cpf = campo1.getText();
+					cpf = cpf.replace(".", "");
+					cpf = cpf.replace("-", "");
+					cpf = cpf.trim();
+					cpf1 = Long.parseLong(cpf);
+					String nome = campo2.getText();
 
 					if (nome.isEmpty() || cpf.isEmpty()) {
 						JOptionPane.showMessageDialog(null, "Nome ou CPF nulos!");
 					} else {
-						funcio.setCpf(Long.parseLong(cpf));
+						funcio.setCpf(cpf1);
 						funcio.setNome(nome);
 						boolean a = funcionarioDAO.remover(funcio);
 						if (a) {
@@ -233,14 +249,21 @@ public class CadastrarFuncionario extends JFrame {
 		contentPane.add(btnAlterar, "cell 3 11,growx,aligny center");
 		btnAlterar.setBackground(Color.WHITE);
 		btnAlterar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 
+			public void actionPerformed(ActionEvent e) {
+				MaskFormatter cpfFormatter = null;
+				try {
+					cpfFormatter = new MaskFormatter("###.###.###-##");
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				Funcionario usua = new Funcionario();
 
 				// Long cpf = Long.parseLong(txtCpf.getText());
 
 				// Criação dos componentes do painel
-				JTextField campo1 = new JTextField();
+				campo1 = new JFormattedTextField(cpfFormatter);// Criação do painel personalizado
 				JTextField campo2 = new JTextField();
 
 				JPanel painel = new JPanel(new GridLayout(0, 2)); // Criação do painel personalizado
@@ -253,13 +276,18 @@ public class CadastrarFuncionario extends JFrame {
 						JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 
 				if (opcao == JOptionPane.OK_OPTION) {
-					String cpf = campo1.getText(); // Obtenção do valor do campo1
+					Long cpf1 = null;
+					String cpf = campo1.getText();
+					cpf = cpf.replace(".", "");
+					cpf = cpf.replace("-", "");
+					cpf = cpf.trim();
+					cpf1 = Long.parseLong(cpf);
 					String nome = campo2.getText(); // Obtenção do valor do campo2
 
 					if (nome.isEmpty() || cpf.isEmpty()) {
 						JOptionPane.showMessageDialog(null, "Nome ou CPF nulos!");
 					} else {
-						usua.setCpf(Long.parseLong(cpf));
+						usua.setCpf(cpf1);
 						usua.setNome(nome);
 						boolean a = funcionarioDAO.alterar(usua);
 						if (a) {
@@ -275,6 +303,7 @@ public class CadastrarFuncionario extends JFrame {
 		contentPane.add(btnListar, "cell 3 7,grow");
 		btnListar.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 11));
 		btnListar.setBackground(Color.WHITE);
+
 		btnListar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<Funcionario> lista = funcionarioDAO.listarFuncionario();
@@ -283,15 +312,25 @@ public class CadastrarFuncionario extends JFrame {
 				model.setRowCount(0); // limpa as linhas da tabela
 
 				for (Funcionario funcionario : lista) {
-					Object[] row = { funcionario.getCpf(), funcionario.getNome() };
+
+					StringBuilder cpfFormatado = new StringBuilder();
+					String numeros = String.valueOf(funcionario.getCpf());
+					cpfFormatado.append(numeros.substring(0, 3));
+					cpfFormatado.append(".");
+					cpfFormatado.append(numeros.substring(3, 6));
+					cpfFormatado.append(".");
+					cpfFormatado.append(numeros.substring(6, 9));
+					cpfFormatado.append("-");
+					cpfFormatado.append(numeros.substring(9, 11));
+
+					cpfFormatado.toString();
+					Object[] row = { cpfFormatado, funcionario.getNome() };
 					model.addRow(row);
 				}
 
 				panel.setVisible(true);
 				btnExcluir.setVisible(true);
 				btnAlterar.setVisible(true);
-				System.out.println(txtCpf);
-
 			}
 		});
 	}

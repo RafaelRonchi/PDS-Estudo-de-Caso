@@ -5,12 +5,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import control.FuncionarioDAO;
 import modelo.Funcionario;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -94,7 +98,21 @@ public class JFrameMain extends JFrame {
 				lblNewLabel_1_1.setFont(new Font("Yu Gothic Light", Font.BOLD, 30));
 				contentPane.add(lblNewLabel_1_1, "cell 1 3,growx,aligny center");
 				
-				txtSenha = new JTextField();
+				
+				MaskFormatter cpfFormatter = null;
+				try {
+					cpfFormatter = new MaskFormatter("###.###.###-##");
+
+					// cpfFormatter.setPlaceholderCharacter('_');
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				txtSenha = new JFormattedTextField(cpfFormatter);
+
+				
+				
+				
+				
 				txtSenha.setColumns(10);
 				contentPane.add(txtSenha, "cell 2 3 2 1,growx,aligny center");
 				
@@ -107,13 +125,19 @@ public class JFrameMain extends JFrame {
 								
 								ArrayList<Funcionario> lista = funcionarioDAO.listarFuncionario();
 								String user = txtUsuario.getText();
-								Long cpf = Long.parseLong(txtSenha.getText());
+								String cpf = txtSenha.getText();
+								cpf = cpf.replace(".", "");
+								cpf = cpf.replace("-", "");
+								cpf = cpf.trim();
+								long cpf1 = Long.parseLong(cpf);
+
+						
 								boolean entrou = false;
 								
 								
 								for (Funcionario funcionario : lista) {
 									
-									if((funcionario.getNome()).equals(user) && (funcionario.getCpf()).equals(cpf)) {
+									if((funcionario.getNome()).equals(user) && (funcionario.getCpf()).equals(cpf1)) {
 										dispose(); // fecha tela atual
 										SelecionarFilme sf = new SelecionarFilme();
 										sf.setVisible(true);
@@ -142,7 +166,13 @@ public class JFrameMain extends JFrame {
 				btnLimpar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose(); // fecha tela atual
-						CadastrarFuncionario cadas = new CadastrarFuncionario();
+						CadastrarFuncionario cadas = null;
+						try {
+							cadas = new CadastrarFuncionario();
+						} catch (ParseException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						cadas.setVisible(true);
 						cadas.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					
