@@ -2,38 +2,33 @@ package control;
 
 import java.util.ArrayList;
 
+import Interfaces.IFuncionario;
 import modelo.Funcionario;
 
-public class FuncionarioDAO {
+public class FuncionarioDAO implements IFuncionario{
 
 	private static ArrayList<Funcionario> funcionario = new ArrayList<>();
 	private static FuncionarioDAO instancia;
 
-	public static ArrayList<Funcionario> getFuncionario() {
-		return funcionario;
-	}
-
-	public static void setfuncionario(ArrayList<Funcionario> funcionario) {
-		FuncionarioDAO.funcionario = funcionario;
-	}
-
 	private FuncionarioDAO() {
 	}
-
-	public ArrayList<Funcionario> listarFuncionario() {
-		return funcionario;
-	}
-
+	
 	public static FuncionarioDAO getInstancia() {
-
+		
 		if (instancia == null) {
 			instancia = new FuncionarioDAO();
 			funcionario = new ArrayList<>();
 		}
-
+		
 		return instancia;
 	}
-
+	
+	@Override
+	public ArrayList<Funcionario> listarFuncionario() {
+		return funcionario;
+	}
+	
+	@Override
 	public boolean inserir(Funcionario p) {
 
 		for (Funcionario funcionario2 : funcionario) {
@@ -47,7 +42,7 @@ public class FuncionarioDAO {
 		return true;
 
 	}
-
+	@Override
 	public boolean remover(Funcionario f) {
 	    for (Funcionario funcionario2 : funcionario) {
 	        if (f.getCpf().equals(funcionario2.getCpf()) && f.getNome().equals(funcionario2.getNome())) {
@@ -58,7 +53,7 @@ public class FuncionarioDAO {
 	    return false;
 	}
 
-
+	@Override
 	public boolean alterar(Funcionario novoFuncionario) {
 		for (int i = 0; i < funcionario.size(); i++) {
 			Funcionario antigoFuncionario = funcionario.get(i);
