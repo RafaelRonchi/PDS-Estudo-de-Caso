@@ -1,4 +1,3 @@
-> :construction: Projeto em construção :construction:
 
 # Projeto Java com Window Builder JFrame - Cadastro de Funcionários e Alocação de Assentos de Cinema
 
