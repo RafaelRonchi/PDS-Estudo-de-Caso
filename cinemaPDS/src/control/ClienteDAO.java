@@ -2,10 +2,11 @@ package control;
 
 import java.util.ArrayList;
 
+import Interfaces.ICliente;
 import modelo.Usuario;
 
-public class UsuarioDAO {
-    private static UsuarioDAO instancia;
+public class ClienteDAO implements ICliente {
+    private static ClienteDAO instancia;
     private static Usuario[][] matrizUsuarios = new Usuario[10][10];
     private static Usuario[][] matrizUsuariosA2 = new Usuario[10][10];
     private static Usuario[][] matrizUsuariosB1 = new Usuario[10][10];
@@ -14,12 +15,12 @@ public class UsuarioDAO {
     private static Usuario[][] matrizUsuariosC2 = new Usuario[10][10];
     
 
-    private UsuarioDAO() {
+    private ClienteDAO() {
     }
 
-    public static UsuarioDAO getInstancia() {
+    public static ClienteDAO getInstancia() {
         if (instancia == null) {
-            instancia = new UsuarioDAO();
+            instancia = new ClienteDAO();
         }
         return instancia;
     }

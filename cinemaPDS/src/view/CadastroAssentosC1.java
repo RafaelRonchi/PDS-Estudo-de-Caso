@@ -24,7 +24,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
-import control.UsuarioDAO;
+import control.ClienteDAO;
 import modelo.Usuario;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JRadioButton;
@@ -36,7 +36,7 @@ public class CadastroAssentosC1 extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtNome;
 	private JTextField txtCpf;
-	private UsuarioDAO usuarioDAO = UsuarioDAO.getInstancia();
+	private ClienteDAO usuarioDAO = ClienteDAO.getInstancia();
 	public static int assento;
 	public static int assento1;
 	private JTable table;
@@ -126,7 +126,7 @@ public class CadastroAssentosC1 extends JFrame {
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				UsuarioDAO usuarioDAO = UsuarioDAO.getInstancia();
+				ClienteDAO usuarioDAO = ClienteDAO.getInstancia();
 				Usuario usua = new Usuario();
 				String cpf = txtCpf.getText();
 				cpf = cpf.replace(".", "");
@@ -179,7 +179,7 @@ public class CadastroAssentosC1 extends JFrame {
 				System.out.println(assento);
 				System.out.println(assento1);
 
-				var retorno = UsuarioDAO.listarUsuarios(assento, assento1, salaN);
+				var retorno = ClienteDAO.listarUsuarios(assento, assento1, salaN);
 				StringBuilder cpfFormatado = new StringBuilder();
 				String numeros = String.valueOf(retorno.getCpf());
 				cpfFormatado.append(numeros.substring(0, 3));
